@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BookText, House } from "lucide-react";
@@ -13,19 +13,21 @@ export function NavLinks() {
 
   return (
     <>
-    {
-      links.map((link) => {
-        const LinkIcon = link.icon
+      {links.map((link) => {
+        const LinkIcon = link.icon;
         return (
-          <Link key={link.href} href={link.href} className={`w-full flex mb-3 hover:bg-gray-200`}>
-            <LinkIcon className='w-6 h-6 stroke-1'/>
-            
+          <Link
+            key={link.href}
+            href={link.href}
+            className={`group w-full flex mb-3 px-6 py-2 hover:bg-gray-100 
+            ${pathname === link.href ? "text-accentSideBar" : ""}`}
+          >
+            <LinkIcon className="w-6 h-6 stroke-1 mr-2" />
+
             <span>{link.label}</span>
           </Link>
-        )
-      })
-        
-    }
+        );
+      })}
     </>
-  )
+  );
 }

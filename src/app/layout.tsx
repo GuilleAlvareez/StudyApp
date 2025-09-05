@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { inter, montserrat } from "./ui/fonts";
+import { MainLayout } from "@/components/MainLayout";
+import { SideBarProvider } from "@/context/SideBarContext";
 import { SideBar } from "@/components/NavBar/SideBar";
 
 export const metadata: Metadata = {
@@ -18,13 +20,15 @@ export default function RootLayout({
       <body
         className={`${montserrat.className} antialiased`}
       >
-        <div className="flex">
-          <SideBar />
-          
-          <main>
-            {children}
-          </main>
-        </div>
+        <SideBarProvider>
+            <div className="flex min-h-screen">
+              <SideBar />
+
+              <main className="flex-1 bg-gray-100">
+                {children}
+              </main>
+            </div>
+        </SideBarProvider>
       </body>
     </html>
   );
