@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { inter, montserrat } from "./ui/fonts";
-import { MainLayout } from "@/components/MainLayout";
 import { SideBarProvider } from "@/context/SideBarContext";
 import { SideBar } from "@/components/NavBar/SideBar";
 
@@ -18,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${montserrat.className} antialiased`}
+        className={`antialiased`}
       >
         <SideBarProvider>
             <div className="flex min-h-screen">

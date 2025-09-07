@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookText, House } from "lucide-react";
+import { BookText, Grid2X2Check, House, StickyNote } from "lucide-react";
 
 export function NavLinks() {
   const pathname = usePathname();
@@ -9,6 +9,8 @@ export function NavLinks() {
   const links = [
     { href: "/", label: "Home", icon: House },
     { href: "/summarizer", label: "Summarizer", icon: BookText },
+    { href: "/quicknotes", label: "QuickNotes", icon: StickyNote },
+    { href: "/exam", label: "Exam", icon: Grid2X2Check },
   ];
 
   return (
