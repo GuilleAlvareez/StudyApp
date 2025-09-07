@@ -1,88 +1,19 @@
-import { UploadCloud, FileText, X } from "lucide-react";
-import { useRef, useState } from "react";
+import { UploadCloud, FileText, X, Menu } from "lucide-react";
+import { useFile } from "@/app/summarizer/hooks/useFile";
+import { useSideBar } from "@/context/SideBarContext";
 
 export function SummarizerPanel() {
-  const [file, setFile] = useState<File | null>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-
-  const MAX_FILE_SIZE = 15 * 1024 * 1024; // 15MB
-
-  const pressInput = () => {
-    inputRef.current?.click();
-  };
-
-  const onDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(true);
-  };
-
-  const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    e.dataTransfer.dropEffect = "copy";
-    setIsDragging(true);
-  };
-
-  const onDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(false);
-  };
-
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(false);
-
-    const dt = e.dataTransfer;
-    if (dt.files && dt.files.length > 0) {
-      const droppedFile = dt.files[0];
-
-      if (droppedFile.type !== "application/pdf") {
-        alert("Solo se permiten archivos PDF");
-        dt.clearData();
-        return;
-      }
-
-      if (droppedFile.size > MAX_FILE_SIZE) {
-        alert("El archivo supera el límite de 10MB");
-        dt.clearData();
-        return;
-      }
-
-      setFile(droppedFile);
-      dt.clearData();
-    }
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0];
-
-    if (!selectedFile) return;
-
-    if (selectedFile.type !== "application/pdf") {
-      alert("Solo se permiten archivos PDF");
-      return;
-    }
-
-    if (selectedFile.size > MAX_FILE_SIZE) {
-      alert("El archivo supera el límite de 10MB");
-      return;
-    }
-
-    setFile(selectedFile);
-  };
-
-  const removeFile = () => {
-    setFile(null);
-    if (inputRef.current) inputRef.current.value = "";
-  };
+  const { file, isDragging, MAX_FILE_SIZE, error, pressInput, onDragEnter, onDragOver, onDragLeave, handleDrop, handleFileChange, removeFile, inputRef } = useFile();
+  const { toggleSideBar } = useSideBar();
 
   return (
     <div className="flex flex-col space-y-6 h-full">
-      <h2 className="text-3xl font-bold text-slate-800">Crea tu Resumen</h2>
+      <div className="flex">
+        <button onClick={toggleSideBar}>
+          <Menu className="w-6 h-6 stroke-1 mr-4"/>
+        </button>
+        <h2 className="text-3xl font-bold text-slate-800">Crea tu Resumen</h2>
+      </div>
 
       <input
         type="file"
@@ -90,6 +21,7 @@ export function SummarizerPanel() {
         ref={inputRef}
         accept=".pdf"
         onChange={handleFileChange}
+        size={MAX_FILE_SIZE}
       />
 
       {/* Área de Carga de Archivos */}
@@ -118,6 +50,7 @@ export function SummarizerPanel() {
       </div>
 
       {/* Archivo Cargado */}
+      {error !== '' && <p className="w-full border border-red-300 bg-red-100 rounded-lg p-3 text-red-500 text-sm">{error}</p>}
       {file && (
         <div className="bg-white border border-slate-200 rounded-lg p-3 flex items-center justify-between shadow-sm">
           <div className="flex items-center space-x-3">
