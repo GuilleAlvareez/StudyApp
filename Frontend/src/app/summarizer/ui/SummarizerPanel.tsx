@@ -1,10 +1,13 @@
 import { UploadCloud, FileText, X, Menu } from "lucide-react";
 import { useFile } from "@/app/summarizer/hooks/useFile";
 import { useSideBar } from "@/context/SideBarContext";
+import { useSummarizer } from "../hooks/useSummarizer";
 
 export function SummarizerPanel() {
   const { file, isDragging, MAX_FILE_SIZE, error, pressInput, onDragEnter, onDragOver, onDragLeave, handleDrop, handleFileChange, removeFile, inputRef } = useFile();
   const { toggleSideBar } = useSideBar();
+
+  const { summarize } = useSummarizer();
 
   return (
     <div className="flex flex-col space-y-6 h-full">
@@ -70,6 +73,7 @@ export function SummarizerPanel() {
 
       {/* Botón de Acción Principal */}
       <button
+        onClick={() => summarize(file as File)}
         className={`w-full text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 ${
           file
             ? "bg-blue-600 hover:bg-blue-700"

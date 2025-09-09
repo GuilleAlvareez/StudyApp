@@ -83,6 +83,8 @@ export function useFile() {
     if (inputRef.current) inputRef.current.value = "";
   };
 
+  console.log(file instanceof File);
+
   return {
     file,
     isDragging,
