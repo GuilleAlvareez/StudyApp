@@ -1,10 +1,11 @@
 import { UploadCloud, FileText, X, Menu } from "lucide-react";
-import { useFile } from "@/app/summarizer/hooks/useFile";
+// import { useFile } from "@/app/summarizer/hooks/useFile";
+import { useFileContext } from "@/context/fileContext";
 import { useSideBar } from "@/context/SideBarContext";
 import { useSummarizer } from "../hooks/useSummarizer";
 
 export function SummarizerPanel() {
-  const { file, isDragging, MAX_FILE_SIZE, error, pressInput, onDragEnter, onDragOver, onDragLeave, handleDrop, handleFileChange, removeFile, inputRef } = useFile();
+  const { file, isDragging, MAX_FILE_SIZE, error, pressInput, onDragEnter, onDragOver, onDragLeave, handleDrop, handleFileChange, removeFile, inputRef } = useFileContext();
   const { toggleSideBar } = useSideBar();
 
   const { summarize } = useSummarizer();

@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { convertToMarkdown } from "./service/methods";
+import { convertToMarkdown, convertToPdf } from "./service/methods";
 
 export async function POST(req: NextRequest) {
   try {
     // 1. Obtener los datos del formulario en lugar de JSON
     const markdownText = await convertToMarkdown(await req.formData());
-    console.log(markdownText, "route");
+    const pdf = await convertToPdf(markdownText as string);
+    // console.log(markdownText, "route");
     return NextResponse.json({ markdownText }, { status: 200 });
 
     // 5. Enviar el texto extraído a tu servicio de Python

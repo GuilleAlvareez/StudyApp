@@ -3,6 +3,7 @@ import "./globals.css";
 import { inter, montserrat } from "./ui/fonts";
 import { SideBarProvider } from "@/context/SideBarContext";
 import { SideBar } from "@/components/NavBar/SideBar";
+import { FileProvider } from "@/context/fileContext";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,7 +25,9 @@ export default function RootLayout({
               <SideBar />
 
               <main className="flex-1 bg-gray-100">
-                {children}
+                <FileProvider>
+                  {children}
+                </FileProvider>
               </main>
             </div>
         </SideBarProvider>
