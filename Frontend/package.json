@@ -6,26 +6,30 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint",
-    "postinstall": "node ./copy-pdf-worker.js"
+    "lint": "eslint"
   },
   "dependencies": {
     "@opendocsg/pdf2md": "^0.2.2",
+    "@react-pdf-viewer/core": "^3.12.0",
+    "@react-pdf-viewer/default-layout": "^3.12.0",
+    "@react-pdf-viewer/page-navigation": "^3.12.0",
     "@sparticuz/chromium": "^138.0.2",
+    "html2pdf.js": "^0.12.0",
     "jspdf": "^3.0.2",
     "lucide-react": "^0.542.0",
     "marked": "^16.2.1",
     "md-to-pdf": "^5.2.4",
     "next": "15.5.2",
-    "pdfjs-dist": "^5.4.149",
+    "pdfjs-dist": "^3.4.120",
     "puppeteer-core": "^24.20.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-pdf": "^10.1.0"
+    "react-markdown": "^10.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/html2pdf.js": "^0.10.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

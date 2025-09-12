@@ -1,5 +1,4 @@
 'use client';
-import { UploadCloud, FileText, X, FileSearch2, ZoomIn, ZoomOut, Download } from "lucide-react";
 import { SummarizerPanel } from "./ui/SummarizerPanel";
 import { ResultViewer } from "./ui/ResultViewer";
 
@@ -12,7 +11,7 @@ export default function SummarizerPage() {
           <SummarizerPanel />
         </div>
 
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-2 overflow-hidden">
           <ResultViewer />
         </div>
       </div>
