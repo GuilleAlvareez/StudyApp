@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, useRef } from "react";
 
 interface FileContextType {
   file: File | null;
+  summaryFile: File | null;
   isDragging: boolean;
   inputRef: React.RefObject<HTMLInputElement | null>;
   MAX_FILE_SIZE: number;
@@ -15,6 +16,7 @@ interface FileContextType {
   handleDrop: (e: React.DragEvent<HTMLDivElement>) => void;
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   removeFile: () => void;
+  setSummaryFile: (file: File | null) => void;
 }
 
 const FileContext = createContext<FileContextType | undefined>(undefined);
@@ -23,6 +25,7 @@ export const FileProvider = ({ children }: { children: React.ReactNode }) => {
   // const fileContext = useFile();
 
   const [file, setFile] = useState<File | null>(null);
+  const [summaryFile, setSummaryFile] = useState<File | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -101,11 +104,13 @@ export const FileProvider = ({ children }: { children: React.ReactNode }) => {
 
   const removeFile = () => {
     setFile(null);
+    setSummaryFile(null);
     if (inputRef.current) inputRef.current.value = "";
   };
 
   const value = {
     file,
+    summaryFile,
     isDragging,
     inputRef,
     MAX_FILE_SIZE,
@@ -117,6 +122,7 @@ export const FileProvider = ({ children }: { children: React.ReactNode }) => {
     handleDrop,
     handleFileChange,
     removeFile,
+    setSummaryFile,
   };
 
   return (
