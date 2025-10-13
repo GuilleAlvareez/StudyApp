@@ -1,6 +1,6 @@
 'use client'
 import { NavLinks } from "./NavLinks";
-import { LogOut, X } from "lucide-react"; // Importa un ícono para logout
+import { LogOut, Notebook, X } from "lucide-react"; // Importa un ícono para logout
 import { useSideBar } from "@/context/SideBarContext";
 import { nunito, poppins, playfairDisplay, lato } from "@/app/ui/fonts";
 
@@ -8,12 +8,12 @@ export function SideBar() {
   const { isOpen, closeSideBar } = useSideBar();
 
   return (
-    <nav className={`h-screen flex flex-col bg-gray-50 border-r border-gray-200 transition-all duration-300 ease-in-out overflow-hidden ${lato.className} ${isOpen ? 'w-64' : 'w-0'}`}>
+    <nav className={`h-screen flex flex-col bg-white border-r border-gray-200 transition-all duration-300 ease-in-out overflow-hidden ${lato.className} ${isOpen ? 'w-64' : 'w-0'}`}>
       
       <div className="min-w-64 flex flex-col flex-1">
 
-        <div className="flex items-center justify-between p-4 border-b border-gray-200">
-          <h1 className={`text-xl font-bold ${poppins.className}`}>SideBar</h1>
+        <div className="flex items-center justify-between p-4">
+          <h1 className={`flex items-center text-xl font-bold ${poppins.className}`}><Notebook className="w-6 h-6 stroke-2 mr-2 text-indigo-600"/>StudyApp</h1>
           <button onClick={closeSideBar} className="p-1 rounded-md hover:bg-gray-200">
             <X className="w-6 h-6 stroke-2" />
           </button>
@@ -28,11 +28,11 @@ export function SideBar() {
           </section>
         </div>
 
-        <div className="p-4 border-t border-gray-200">
+        {/* Divider */}
+        <div className="w-5/6 mx-auto border-t border-gray-200"/>
+
+        <div className="w-5/6 mx-auto py-4">
           <section>
-            <h2 className="mb-3 px-0 text-xs font-semibold uppercase text-gray-500 tracking-wider">
-              Usuario
-            </h2>
             
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center font-bold text-gray-600">

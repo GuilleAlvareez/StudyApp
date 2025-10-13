@@ -99,5 +99,5 @@ export function ResultViewer() {
                 )}
             </div>
         </div>
-    );
+    )
 }
