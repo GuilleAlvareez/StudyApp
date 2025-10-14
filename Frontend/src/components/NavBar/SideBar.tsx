@@ -2,13 +2,13 @@
 import { NavLinks } from "./NavLinks";
 import { LogOut, Notebook, X } from "lucide-react"; // Importa un ícono para logout
 import { useSideBar } from "@/context/SideBarContext";
-import { nunito, poppins, playfairDisplay, lato } from "@/app/ui/fonts";
+import { poppins, lato } from "@/app/ui/fonts";
 
 export function SideBar() {
   const { isOpen, closeSideBar } = useSideBar();
 
   return (
-    <nav className={`h-screen flex flex-col bg-white border-r border-gray-200 transition-all duration-300 ease-in-out overflow-hidden ${lato.className} ${isOpen ? 'w-64' : 'w-0'}`}>
+    <nav className={`h-screen flex flex-col py-2 bg-white border-r border-gray-200 transition-all duration-300 ease-in-out overflow-hidden ${lato.className} ${isOpen ? 'w-64' : 'w-0'}`}>
       
       <div className="min-w-64 flex flex-col flex-1">
 
@@ -21,7 +21,7 @@ export function SideBar() {
 
         <div className="flex-1 py-4">
           <section>
-            <h2 className="mb-2 px-4 text-xs font-semibold uppercase text-gray-500 tracking-wider">
+            <h2 className="mb-4 px-4 text-xs font-semibold uppercase text-gray-500 tracking-wider">
               Funcionalidades
             </h2>
             <NavLinks />
