@@ -1,4 +1,4 @@
-import { UploadCloud, FileText, X, Menu } from "lucide-react";
+import { UploadCloud, FileText, X, Menu, FileUp } from "lucide-react";
 // import { useFile } from "@/app/summarizer/hooks/useFile";
 import { useFileContext } from "@/context/fileContext";
 import { useSideBar } from "@/context/SideBarContext";
@@ -6,17 +6,18 @@ import { useSummarizer } from "../hooks/useSummarizer";
 
 export function SummarizerPanel() {
   const { file, isDragging, MAX_FILE_SIZE, error, pressInput, onDragEnter, onDragOver, onDragLeave, handleDrop, handleFileChange, removeFile, inputRef } = useFileContext();
-  const { toggleSideBar } = useSideBar();
+  // const { toggleSideBar } = useSideBar();
 
-  const { summarize } = useSummarizer();
+  // const { summarize } = useSummarizer();
 
   return (
-    <div className="flex flex-col space-y-6 h-full">
-      <div className="flex">
-        <button onClick={toggleSideBar}>
+    <div className="flex flex-col items-center text-start space-y-6 h-full w-full lg:py-6 lg:px-10 tracking-wide">
+      <div className="flex flex-col w-full mb-15 lg:mb-35">
+        {/* <button onClick={toggleSideBar}>
           <Menu className="w-6 h-6 stroke-1 mr-4"/>
-        </button>
-        <h2 className="text-3xl font-bold text-slate-800">Crea tu Resumen</h2>
+        </button> */}
+        <h2 className="text-4xl font-bold text-slate-800 mb-2">Crea tu Resumen</h2>
+        <p className="text-slate-500">Transforma tus documentos en résumenes claros y concisos en segundos.</p>
       </div>
 
       <input
@@ -29,28 +30,35 @@ export function SummarizerPanel() {
       />
 
       {/* Área de Carga de Archivos */}
-      <div className="space-y-3">
+      <div className="space-y-3 w-5/6 h-3/5">
         <div
           onClick={pressInput}
           onDragEnter={onDragEnter}
           onDragOver={onDragOver}
           onDragLeave={onDragLeave}
           onDrop={handleDrop}
-          className={`bg-slate-50 border-2 border-dashed rounded-xl p-8 flex flex-col items-center justify-center space-y-4 text-center cursor-pointer hover:border-blue-500 hover:bg-slate-100 transition-all duration-300 shadow-inner ${
+          className={`h-full relative bg-slate-50 border-2 border-dashed rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:border-blue-500 hover:bg-slate-100 transition-all duration-300 shadow-inner ${
             isDragging ? "border-blue-500 bg-slate-100" : "border-slate-300"
           }`}
         >
-          <div className="bg-white p-4 rounded-full shadow-md">
-            <UploadCloud className="w-8 h-8 text-blue-600" />
+          {/* <div className="flex items-center justify-center bg-white w-30 h-30 p-4 rounded-full shadow-md mb-6">
+            <UploadCloud className="w-full h-full text-blue-600" />
+          </div> */}
+
+          <div className="flex items-center justify-center bg-indigo-100 text-indigo-600 w-30 h-30 p-4 rounded-full shadow-md mb-6">
+            <FileUp className="w-full h-full stroke-1"/>
           </div>
-          <p className="text-slate-700 font-medium">
+
+          <p className="text-slate-700 font-bold text-2xl mb-2">
             Arrastra y suelta tu documento aquí
           </p>
-          <p className="text-sm text-slate-500">o haz clic para seleccionarlo</p>
+          <p className="text-lg text-slate-500">o haz clic para seleccionarlo</p>
+          
+          <p className="absolute bottom-10 lg:bottom-1/6 text-xs p-2 text-slate-500 text-center">
+            Soporta archivos PDF de hasta 15MB
+          </p>
         </div>
-        <p className="text-xs text-slate-500 text-center">
-          Soporta archivos PDF de hasta 15MB
-        </p>
+        
       </div>
 
       {/* Archivo Cargado */}
@@ -71,19 +79,7 @@ export function SummarizerPanel() {
           </button>
         </div>
       )}
-
-      {/* Botón de Acción Principal */}
-      <button
-        onClick={() => summarize(file as File)}
-        className={`w-full text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 ${
-          file
-            ? "bg-blue-600 hover:bg-blue-700"
-            : "bg-slate-300 cursor-not-allowed"
-        }`}
-        disabled={!file}
-      >
-        Resumir Documento
-      </button>
+    
     </div>
   );
 }

@@ -1,19 +1,24 @@
 'use client';
 import { SummarizerPanel } from "./ui/SummarizerPanel";
 import { ResultViewer } from "./ui/ResultViewer";
+import { useFileContext } from "@/context/fileContext";
 
 export default function SummarizerPage() {
+  const { file } = useFileContext();
+
   return (
     // Usamos un fondo ligeramente tintado para toda la página
-    <div className="h-screen w-full p-8 bg-slate-50">
-      <div className="h-full grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-1">
-          <SummarizerPanel />
-        </div>
-
-        <div className="lg:col-span-2 overflow-hidden">
-          <ResultViewer />
-        </div>
+    <div className="h-screen w-full p-8 bg-[#f8f9fa]">
+      <div className="h-full gap-8">
+        {file ? (
+          <div className="overflow-hidden h-full">
+            <ResultViewer />
+          </div>
+        ) : (
+          <div className="h-full">
+            <SummarizerPanel />
+          </div>
+        )}
       </div>
     </div>
   );
