@@ -21,9 +21,9 @@ export function SideBar() {
 
         <div className="flex-1 py-4">
           <section>
-            <h2 className="mb-4 px-4 text-xs font-semibold uppercase text-gray-500 tracking-wider">
+            <p className="mb-4 px-4 text-[15px] font-semibold uppercase text-gray-500 tracking-wider">
               Funcionalidades
-            </h2>
+            </p>
             <NavLinks />
           </section>
         </div>
