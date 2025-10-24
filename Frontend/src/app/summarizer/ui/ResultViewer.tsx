@@ -187,7 +187,7 @@ export function ResultViewer() {
             <button
               onClick={() => summarize(file as File)}
               className="w-full flex items-center justify-center text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 bg-indigo-400 hover:bg-indigo-600"
-              disabled={!file}
+              disabled={loading}
             >
               <BookOpenCheck className="w-6 h-6 stroke-2 mr-2" />
               Resumir Documento

@@ -3,9 +3,23 @@ import { UploadCloud, FileText, X, Menu, FileUp } from "lucide-react";
 import { useFileContext } from "@/context/fileContext";
 import { useSideBar } from "@/context/SideBarContext";
 import { useSummarizer } from "../hooks/useSummarizer";
+import { BaselineCloudUpload } from "@/app/quicknotes/ui/icons";
 
 export function SummarizerPanel() {
-  const { file, isDragging, MAX_FILE_SIZE, error, pressInput, onDragEnter, onDragOver, onDragLeave, handleDrop, handleFileChange, removeFile, inputRef } = useFileContext();
+  const {
+    file,
+    isDragging,
+    MAX_FILE_SIZE,
+    error,
+    pressInput,
+    onDragEnter,
+    onDragOver,
+    onDragLeave,
+    handleDrop,
+    handleFileChange,
+    removeFile,
+    inputRef,
+  } = useFileContext();
   // const { toggleSideBar } = useSideBar();
 
   // const { summarize } = useSummarizer();
@@ -16,8 +30,12 @@ export function SummarizerPanel() {
         {/* <button onClick={toggleSideBar}>
           <Menu className="w-6 h-6 stroke-1 mr-4"/>
         </button> */}
-        <h2 className="text-4xl font-bold text-slate-800 mb-2">Crea tu Resumen</h2>
-        <p className="text-slate-500">Transforma tus documentos en résumenes claros y concisos en segundos.</p>
+        <h2 className="text-4xl font-bold text-slate-800 mb-2">
+          Crea tu Resumen
+        </h2>
+        <p className="text-slate-500">
+          Transforma tus documentos en résumenes claros y concisos en segundos.
+        </p>
       </div>
 
       <input
@@ -37,32 +55,35 @@ export function SummarizerPanel() {
           onDragOver={onDragOver}
           onDragLeave={onDragLeave}
           onDrop={handleDrop}
-          className={`h-full relative bg-slate-50 border-2 border-dashed rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:border-blue-500 hover:bg-slate-100 transition-all duration-300 shadow-inner ${
-            isDragging ? "border-blue-500 bg-slate-100" : "border-slate-300"
+          className={`h-full relative bg-slate-50 border-2 border-dashed rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:border-indigo-400 hover:bg-slate-100 transition-all duration-300 shadow-inner ${
+            isDragging ? "border-indigo-400 bg-slate-100" : "border-slate-300"
           }`}
         >
           {/* <div className="flex items-center justify-center bg-white w-30 h-30 p-4 rounded-full shadow-md mb-6">
             <UploadCloud className="w-full h-full text-blue-600" />
           </div> */}
 
-          <div className="flex items-center justify-center bg-indigo-100 text-indigo-600 w-30 h-30 p-4 rounded-full shadow-md mb-6">
-            <FileUp className="w-full h-full stroke-1"/>
-          </div>
+          <BaselineCloudUpload className="w-20 h-20 stroke-1 text-slate-400" />
 
           <p className="text-slate-700 font-bold text-2xl mb-2">
             Arrastra y suelta tu documento aquí
           </p>
-          <p className="text-lg text-slate-500">o haz clic para seleccionarlo</p>
-          
+          <p className="text-lg text-slate-500">
+            o haz clic para seleccionarlo
+          </p>
+
           <p className="absolute bottom-10 lg:bottom-1/6 text-xs p-2 text-slate-500 text-center">
             Soporta archivos PDF de hasta 15MB
           </p>
         </div>
-        
       </div>
 
       {/* Archivo Cargado */}
-      {error !== '' && <p className="w-full border border-red-300 bg-red-100 rounded-lg p-3 text-red-500 text-sm">{error}</p>}
+      {error !== "" && (
+        <p className="w-full border border-red-300 bg-red-100 rounded-lg p-3 text-red-500 text-sm">
+          {error}
+        </p>
+      )}
       {file && (
         <div className="bg-white border border-slate-200 rounded-lg p-3 flex items-center justify-between shadow-sm">
           <div className="flex items-center space-x-3">
@@ -79,7 +100,6 @@ export function SummarizerPanel() {
           </button>
         </div>
       )}
-    
     </div>
   );
 }
