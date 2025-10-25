@@ -17,7 +17,7 @@ export function UploadFileBox() {
   } = useFileContext();
 
   return (
-    <div className="w-1/3 max-w-2xl flex flex-col bg-white px-6 py-7 rounded-lg shadow">
+    <div className="w-full max-w-2xl flex flex-col bg-white px-6 py-7 rounded-lg shadow mb-6">
       <p className="text-slate-800 font-semibold text-xl">Subir archivo</p>
 
       <input
@@ -39,12 +39,12 @@ export function UploadFileBox() {
           onDrop={handleDrop}
           className={`relative bg-slate-50 border-2 border-dashed rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:border-indigo-400 hover:bg-slate-100 transition-all duration-300 shadow-inner border-slate-300`}
         >
-          <BaselineCloudUpload className="w-20 h-20 stroke-1 text-slate-400" />
+          <BaselineCloudUpload className="w-20 h-20 stroke-1 text-icons" />
 
-          <p className="text-slate-700 font-bold text-lg mb-2">
+          <p className="text-textGray font-bold text-lg mb-2">
             Arrastra y suelta tu documento aquí
           </p>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-textGray">
             o haz clic para seleccionarlo
           </p>
 

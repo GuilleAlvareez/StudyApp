@@ -63,16 +63,16 @@ export function SummarizerPanel() {
             <UploadCloud className="w-full h-full text-blue-600" />
           </div> */}
 
-          <BaselineCloudUpload className="w-20 h-20 stroke-1 text-slate-400" />
+          <BaselineCloudUpload className="w-20 h-20 stroke-1 text-icons" />
 
-          <p className="text-slate-700 font-bold text-2xl mb-2">
+          <p className="text-textGray font-bold text-2xl mb-2">
             Arrastra y suelta tu documento aquí
           </p>
-          <p className="text-lg text-slate-500">
+          <p className="text-lg text-textGray">
             o haz clic para seleccionarlo
           </p>
 
-          <p className="absolute bottom-10 lg:bottom-1/6 text-xs p-2 text-slate-500 text-center">
+          <p className="absolute bottom-10 lg:bottom-1/6 text-xs p-2 text-textGray text-center">
             Soporta archivos PDF de hasta 15MB
           </p>
         </div>

@@ -37,13 +37,12 @@ export function SettingsBox() {
   const isButtonDisabled = !value || error !== null;
 
   return (
-    <div className="w-1/3 flex flex-col bg-white px-6 py-7 rounded-lg shadow">
+    <div className="w-full flex flex-col bg-white px-6 py-7 rounded-lg shadow">
       <p className="text-slate-800 font-semibold text-xl">Ajustes</p>
 
       <div className="flex flex-col mt-4">
-        <p className="text-slate-600">Numero de notas</p>
+        <p className="text-textGray">Numero de notas</p>
 
-        {/* Meter validacion para qeu solo meta numeros */}
         <input
           ref={inputRef}
           type="text"
