@@ -1,4 +1,4 @@
-'use client'
+"use client";
 // import { useFile } from "@/app/summarizer/hooks/useFile";
 import React, { createContext, useContext, useState, useRef } from "react";
 
@@ -17,6 +17,7 @@ interface FileContextType {
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   removeFile: () => void;
   setSummaryFile: (file: File | null) => void;
+  clearFile: () => void;
 }
 
 const FileContext = createContext<FileContextType | undefined>(undefined);
@@ -31,10 +32,10 @@ export const FileProvider = ({ children }: { children: React.ReactNode }) => {
 
   const MAX_FILE_SIZE = 15 * 1024 * 1024; // 15MB
 
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<string>("");
 
   const pressInput = () => {
-    setError('')
+    setError("");
     inputRef.current?.click();
   };
 
@@ -77,8 +78,8 @@ export const FileProvider = ({ children }: { children: React.ReactNode }) => {
         dt.clearData();
         return;
       }
-      
-      setError('');
+
+      setError("");
       setFile(droppedFile);
       dt.clearData();
     }
@@ -108,6 +109,17 @@ export const FileProvider = ({ children }: { children: React.ReactNode }) => {
     if (inputRef.current) inputRef.current.value = "";
   };
 
+  const clearFile = () => {
+    setFile(null);
+    setIsDragging(false);
+    // Resetea cualquier otro estado relacionado con el archivo
+    // Por ejemplo: setFileName(''); setError(null);
+    if (inputRef.current) {
+      inputRef.current.value = ""; // Limpia el valor del input por si acaso
+    }
+    console.log("Estado del archivo limpiado.");
+  };
+
   const value = {
     file,
     summaryFile,
@@ -123,13 +135,10 @@ export const FileProvider = ({ children }: { children: React.ReactNode }) => {
     handleFileChange,
     removeFile,
     setSummaryFile,
+    clearFile,
   };
 
-  return (
-    <FileContext.Provider value={value}>
-      {children}
-    </FileContext.Provider>
-  );
+  return <FileContext.Provider value={value}>{children}</FileContext.Provider>;
 };
 
 export const useFileContext = () => {
