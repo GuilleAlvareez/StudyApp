@@ -20,7 +20,7 @@ import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { Loader } from "./Loader";
 
 export function ResultViewer() {
-  const { file, summaryFile, removeFile } = useFileContext();
+  const { file, summaryFile, removeFile, clearFile } = useFileContext();
   const { summarize, loading } = useSummarizer();
   const [numPages, setNumPages] = useState<number | null>(null);
   const [fileData, setFileData] = useState<Uint8Array | null>(null);
@@ -41,6 +41,7 @@ export function ResultViewer() {
       setFileData(null);
     }
   }, [displayFile]);
+
 
   // const fileUrl = useMemo(() => {
   //     if (displayFile) {

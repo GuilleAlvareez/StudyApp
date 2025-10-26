@@ -2,9 +2,16 @@
 import { SummarizerPanel } from "./ui/SummarizerPanel";
 import { ResultViewer } from "./ui/ResultViewer";
 import { useFileContext } from "@/context/fileContext";
+import { useEffect } from "react";
 
 export default function SummarizerPage() {
-  const { file } = useFileContext();
+  const { file, clearFile } = useFileContext();
+
+  useEffect(() => {
+    return () => {
+      clearFile();
+    };
+  }, []);
 
   return (
     // Usamos un fondo ligeramente tintado para toda la página

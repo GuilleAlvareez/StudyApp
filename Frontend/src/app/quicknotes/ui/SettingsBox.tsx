@@ -1,8 +1,10 @@
 "use client";
+import { useFileContext } from "@/context/fileContext";
 import { WandSparkles } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export function SettingsBox() {
+  const { file } = useFileContext();
   const inputRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string | null>(null);
   const [value, setValue] = useState<string>("");
@@ -36,6 +38,15 @@ export function SettingsBox() {
 
   const isButtonDisabled = !value || error !== null;
 
+  const handleButtonClick = () => {
+    if (!file) return;
+    if (!inputRef.current) return;
+
+    // Lógica para enviar el archivo y el número de notas al backend
+    const numNotes = inputRef.current?.value;
+    generateNotes(file, numNotes);
+  };
+
   return (
     <div className="w-full flex flex-col bg-white px-6 py-7 rounded-lg shadow">
       <p className="text-slate-800 font-semibold text-xl">Ajustes</p>
@@ -58,7 +69,7 @@ export function SettingsBox() {
         {error && <span className="text-red-500 text-sm mb-4">{error}</span>}
 
         <button
-          onClick={() => console.log("hola")}
+          onClick={handleButtonClick}
           className={`bg-indigo-500 flex justify-center items-center py-2 rounded-lg text-white font-semibold transition-color duration-200 ease-in-out ${
             error || isButtonDisabled
               ? " cursor-not-allowed"
@@ -73,3 +84,7 @@ export function SettingsBox() {
     </div>
   );
 }
+function generateNotes(file: File, numNotes: string) {
+  throw new Error("Function not implemented.");
+}
+
