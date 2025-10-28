@@ -2,11 +2,12 @@
 import { useFileContext } from "@/context/fileContext";
 import { WandSparkles } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
-import { useQuickNotes } from "../hooks/useQuickNotes";
+// import { useQuickNotes } from "../hooks/useQuickNotes";
+import { useQuickNotesContext } from "../context/QuickNotesContex";
 
 export function SettingsBox() {
   const { file } = useFileContext();
-  const { generateNotes, loading, notes } = useQuickNotes();
+  const { generateNotes, loading } = useQuickNotesContext();
   const inputRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string | null>(null);
   const [value, setValue] = useState<string>("");
@@ -41,8 +42,7 @@ export function SettingsBox() {
   const isButtonDisabled = !value || error !== null;
 
   const handleButtonClick = () => {
-    if (!file) return;
-    if (!inputRef.current) return;
+    if (!file || !inputRef.current?.value) return;
 
     // Lógica para enviar el archivo y el número de notas al backend
     const numNotes = Number(inputRef.current?.value);

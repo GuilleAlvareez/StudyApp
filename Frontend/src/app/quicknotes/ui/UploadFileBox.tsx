@@ -2,6 +2,7 @@
 import { FileText, FileUp, X } from "lucide-react";
 import { useFileContext } from "@/context/fileContext";
 import { BaselineCloudUpload } from "./icons";
+import { useQuickNotesContext } from "../context/QuickNotesContex";
 
 export function UploadFileBox() {
   const {
@@ -17,6 +18,13 @@ export function UploadFileBox() {
     removeFile,
     inputRef,
   } = useFileContext();
+
+  const { clearNotes } = useQuickNotesContext();
+
+  const handleRemoveFile = () => {
+    removeFile();
+    clearNotes();
+  };
 
   function formatFileSize(file?: File | Blob | null): string {
     if (!file) return "0 B";
@@ -85,7 +93,7 @@ export function UploadFileBox() {
             </div>
           </div>
           <button
-            onClick={removeFile}
+            onClick={handleRemoveFile}
             className="p-1.5 hover:bg-slate-100 rounded-full transition-colors"
           >
             <X className="w-4 h-4 text-slate-500" />
