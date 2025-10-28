@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    console.log("Markdown extraído, longitud:", markdownText.length);
+    console.log("Markdown extraído, longitud:", markdownText);
     
     const response = await fetch(
       "https://openrouter.ai/api/v1/chat/completions",

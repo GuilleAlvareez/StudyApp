@@ -1,14 +1,23 @@
+import { convertToMarkdown } from "../utils/methods";
+
 export function quickNotesService() {
-  const generateNotes = async (file: File, numNotes: number): Promise<File> => {
+  const generateNotes = async (file: File, numNotes: number): Promise<string> => {
     console.log("Generando notas desde el servicio:");
     
-    const formData = new FormData();
-    formData.append("file", file); // El archivo
-    formData.append("numNotes", numNotes.toString()); // El número convertido a string
+    // const formData = new FormData();
+    // formData.append("file", file); // El archivo
+    // formData.append("numNotes", numNotes.toString()); // El número convertido a string
     
-    const response = await fetch('http://localhost:3000/api/quicknotes', {
+    const markdownText = await convertToMarkdown(file);
+
+    const bodyToSend = {
+      numNotes: numNotes.toString(),
+      markdownText: markdownText,
+    }
+
+    const response = await fetch('http://localhost:3000/api/quickNotes', {
       method: 'POST',
-      body: formData,
+      body: JSON.stringify(bodyToSend),
     });
 
     if (!response.ok) {

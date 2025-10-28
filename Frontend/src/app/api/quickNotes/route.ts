@@ -1,22 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
-import { convertToMarkdown } from "../quickNotes/service/methods";
+import { convertToMarkdown } from "../../quicknotes/utils/methods";
 
 export async function POST(req: NextRequest) {
   try {
-    const formData = await req.formData();
+    // const formData = await req.formData();
 
-    const numNotes = formData.get("numNotes") as string | null;
-    const file = formData.get("file") as File | null;
+    // const numNotes = formData.get("numNotes") as string | null;
+    // const file = formData.get("file") as File | null;
 
-    const markdownText = await convertToMarkdown(file);
+    // const markdownText = await convertToMarkdown(file);
+
+    const { numNotes, markdownText } = await req.json();
 
     if (!markdownText) {
       return NextResponse.json(
-        { error: "No se pudo extraer texto del PDF." },
+        { error: "Falta el texto del PDF." },
         { status: 400 }
       );
     }
-    console.log("Texto extraído:", markdownText);
+    console.log("LLega antes de la api");
     
     const response = await fetch(
       "https://openrouter.ai/api/v1/chat/completions",
@@ -33,7 +35,7 @@ export async function POST(req: NextRequest) {
           messages: [
             {
               role: "system",
-              content: process.env.SYSTEM_PROMPT_SUMMARIZER,
+              content: process.env.SYSTEM_PROMPT_QUICKNOTES,
             },
             {
               role: "user",
@@ -43,6 +45,8 @@ export async function POST(req: NextRequest) {
         }),
       }
     );
+
+    console.log("Sale de la api");
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -56,5 +60,12 @@ export async function POST(req: NextRequest) {
     const data = await response.json();
     console.log("Notas recibidas:", data);
     
-  } catch (error) {}
+    return NextResponse.json(data.choices?.[0]?.message?.content);
+  } catch (error) {
+    console.error("Error en el handler de la API:", error);
+    return NextResponse.json(
+      { error: "Error interno del servidor." },
+      { status: 500 }
+    );
+  }
 }

@@ -2,9 +2,11 @@
 import { useFileContext } from "@/context/fileContext";
 import { WandSparkles } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import { useQuickNotes } from "../hooks/useQuickNotes";
 
 export function SettingsBox() {
   const { file } = useFileContext();
+  const { generateNotes, loading, notes } = useQuickNotes();
   const inputRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string | null>(null);
   const [value, setValue] = useState<string>("");
@@ -43,7 +45,7 @@ export function SettingsBox() {
     if (!inputRef.current) return;
 
     // Lógica para enviar el archivo y el número de notas al backend
-    const numNotes = inputRef.current?.value;
+    const numNotes = Number(inputRef.current?.value);
     generateNotes(file, numNotes);
   };
 
@@ -84,7 +86,3 @@ export function SettingsBox() {
     </div>
   );
 }
-function generateNotes(file: File, numNotes: string) {
-  throw new Error("Function not implemented.");
-}
-
