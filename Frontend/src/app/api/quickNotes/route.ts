@@ -19,7 +19,8 @@ export async function POST(req: NextRequest) {
       );
     }
     console.log("LLega antes de la api");
-    
+    console.log("Usando modelo:", process.env.LLM_MODEL);
+
     const response = await fetch(
       "https://openrouter.ai/api/v1/chat/completions",
       {

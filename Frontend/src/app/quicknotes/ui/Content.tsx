@@ -88,6 +88,7 @@ export function Content() {
 
     setIsDownloading(false);
   };
+
   return (
     <div className="flex-1 flex w-full gap-10 tracking-wide">
       <div className="flex flex-col max-w-2xl flex-shrink-0">
@@ -100,14 +101,14 @@ export function Content() {
           <p className="text-slate-800 font-semibold text-xl mb-6">
             Notas generadas
           </p>
-          <button
-            onClick={handleDownloadZip}
-            disabled={notes.length === 0 || isDownloading}
-            className="flex cursor-pointer"
-          >
-            <Download className="w-5 h-5" />
-            {isDownloading ? "Descargando..." : "Descargar ZIP"}
-          </button>
+          { notes.length > 0 && (
+            <button
+              onClick={handleDownloadZip}
+              className="flex cursor-pointer justify-center items-center h-full hover:underline"
+            >
+              <Download className="w-6 h-6 mr-2" />
+            </button>
+          )}
         </div>
         {notes.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full">
@@ -121,7 +122,7 @@ export function Content() {
         ) : (
           <div className="flex flex-col flex-1">
             {/* Grid de notas */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 flex-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 flex-1">
               {currentNotes.map((note, index) => (
                 <PostIt
                   ref={(el) => {
