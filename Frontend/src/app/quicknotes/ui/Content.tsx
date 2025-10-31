@@ -10,7 +10,7 @@ import html2canvas from "html2canvas"; // Importa la nueva librería
 export function Content() {
   const { notes } = useQuickNotesContext();
   const [currentPage, setCurrentPage] = useState(1);
-  const notesPerPage = 6; // 2 filas x 3 columnas
+  const notesPerPage = 4; // Notes by page
 
   const postitRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [isDownloading, setIsDownloading] = useState(false);
@@ -90,7 +90,7 @@ export function Content() {
   };
 
   return (
-    <div className="flex-1 flex w-full gap-10 tracking-wide">
+    <div className="flex-1 flex max-w-full gap-10 tracking-wide">
       <div className="flex flex-col max-w-2xl flex-shrink-0">
         <UploadFileBox />
         <SettingsBox />
@@ -122,7 +122,7 @@ export function Content() {
         ) : (
           <div className="flex flex-col flex-1">
             {/* Grid de notas */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 flex-1">
+            <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6 flex-1">
               {currentNotes.map((note, index) => (
                 <PostIt
                   ref={(el) => {
@@ -132,6 +132,7 @@ export function Content() {
                   header={note.header}
                   content={note.content}
                   color={colors[(startIndex + index) % colors.length]}
+                  inclination={`note-tilt-${(index % 4) + 1}`}
                 />
               ))}
             </div>
