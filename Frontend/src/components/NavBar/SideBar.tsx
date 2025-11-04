@@ -14,9 +14,9 @@ export function SideBar() {
 
         <div className="flex items-center justify-between p-4">
           <h1 className={`flex items-center text-xl font-bold ${poppins.className}`}><Notebook className="w-6 h-6 stroke-2 mr-2 text-indigo-600"/>StudyApp</h1>
-          {/* <button onClick={closeSideBar} className="p-1 rounded-md hover:bg-gray-200">
+          <button onClick={closeSideBar} className="p-1 rounded-md hover:bg-gray-200">
             <X className="w-6 h-6 stroke-2" />
-          </button> */}
+          </button>
         </div>
 
         <div className="flex-1 py-4">

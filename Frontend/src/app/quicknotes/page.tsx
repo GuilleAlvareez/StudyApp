@@ -16,7 +16,7 @@ export default function QuickNotesPage() {
 
   return (
     <QuickNotesProvider>
-      <div className="h-screen w-full p-8 bg-[#f8f9fa]">
+      <div className="h-screen w-full p-8 bg-[#f8f9fa] overflow-x-hidden">
         <div className="flex flex-col h-full w-full items-center text-start lg:py-6 lg:px-10 tracking-wide">
           <Header />
           <Content />

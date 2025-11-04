@@ -3,24 +3,52 @@ import { SettingsBox } from "./SettingsBox";
 import { UploadFileBox } from "./UploadFileBox";
 import { PostIt } from "./postit";
 import { useQuickNotesContext } from "../context/QuickNotesContex";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import JSZip from "jszip";
-import html2canvas from "html2canvas"; // Importa la nueva librería
+import html2canvas from "html2canvas";
+
+// Hook personalizado para detectar el tamaño de la ventana
+function useWindowSize() {
+  const [windowSize, setWindowSize] = useState({
+    width: typeof window !== 'undefined' ? window.innerWidth : 1024,
+  });
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+      });
+    }
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowSize;
+}
 
 export function Content() {
   const { notes } = useQuickNotesContext();
   const [currentPage, setCurrentPage] = useState(1);
-  const notesPerPage = 4; // Notes by page
+  const { width } = useWindowSize();
+
+  const isXLScreen = width >= 1280;
+  const notesPerPage = isXLScreen ? 4 : 2;
 
   const postitRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [isDownloading, setIsDownloading] = useState(false);
 
   const colors = ["#fef08a", "#bfdbfe", "#bbf7d0", "#fbcfe8", "#e9d5ff"];
 
-  // Calcular paginación
   const totalPages = Math.ceil(notes.length / notesPerPage);
   const startIndex = (currentPage - 1) * notesPerPage;
   const currentNotes = notes.slice(startIndex, startIndex + notesPerPage);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [isXLScreen]);
 
   const goToPage = (page: number) => {
     setCurrentPage(page);
@@ -35,7 +63,6 @@ export function Content() {
   };
 
   const handleDownloadZip = async () => {
-    console.log("Refs de los Post-its:", postitRefs.current);
     if (notes.length === 0 || isDownloading) {
       return;
     }
@@ -43,26 +70,20 @@ export function Content() {
     setIsDownloading(true);
     const zip = new JSZip();
 
-    // Usamos un bucle for...of para poder usar await dentro
     for (const [index, note] of notes.entries()) {
       const element = postitRefs.current[index];
 
       if (element) {
         try {
-          // 1. "Fotografía" el elemento DOM y obtén un canvas
           const canvas = await html2canvas(element, {
-            // Opciones para mejorar la calidad de la imagen
             useCORS: true,
             scale: 2,
           });
-
-          // 2. Convierte el canvas a un Blob de imagen PNG
           const imageBlob = await new Promise<Blob | null>((resolve) =>
             canvas.toBlob(resolve, "image/png")
           );
 
           if (imageBlob) {
-            // 3. Añade la imagen al ZIP
             const safeHeader = note.header
               .replace(/[^a-zA-Z0-9]/g, "_")
               .substring(0, 30);
@@ -75,7 +96,6 @@ export function Content() {
       }
     }
 
-    // 4. Genera y descarga el archivo ZIP
     const zipBlob = await zip.generateAsync({ type: "blob" });
     const url = URL.createObjectURL(zipBlob);
     const a = document.createElement("a");
@@ -90,13 +110,13 @@ export function Content() {
   };
 
   return (
-    <div className="flex-1 flex max-w-full gap-10 tracking-wide">
+    <div className="flex-1 flex flex-col md:flex-row min-w-full gap-10 tracking-wide">
       <div className="flex flex-col max-w-2xl flex-shrink-0">
         <UploadFileBox />
         <SettingsBox />
       </div>
 
-      <div className="flex-1 bg-white px-6 py-7 shadow rounded-lg">
+      <div className="min-h-auto flex-1 bg-white px-6 py-7 shadow rounded-lg flex flex-col">
         <div className="flex justify-between">
           <p className="text-slate-800 font-semibold text-xl mb-6">
             Notas generadas
@@ -111,7 +131,7 @@ export function Content() {
           )}
         </div>
         {notes.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-full">
+          <div className="flex flex-1 flex-col items-center justify-center">
             <FileUp className="w-20 h-20 stroke-1 text-icons" />
             <p className="text-xl text-[#808290]">Tus notas apareceran aqui</p>
             <p className="text-xl text-[#808290]">
@@ -121,12 +141,11 @@ export function Content() {
           </div>
         ) : (
           <div className="flex flex-col flex-1">
-            {/* Grid de notas */}
-            <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6 flex-1">
+            <div className="grid grid-cols-1 2xl:grid-cols-2 gap-6 flex-1">
               {currentNotes.map((note, index) => (
                 <PostIt
                   ref={(el) => {
-                    postitRefs.current[index] = el;
+                    postitRefs.current[startIndex + index] = el;
                   }}
                   key={startIndex + index}
                   header={note.header}
@@ -137,7 +156,6 @@ export function Content() {
               ))}
             </div>
 
-            {/* Paginación */}
             {totalPages > 1 && (
               <div className="flex items-center justify-center gap-4 mt-8 pt-4 border-t border-gray-200">
                 <button
