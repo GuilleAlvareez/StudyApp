@@ -12,7 +12,7 @@ interface SideBarContextType {
 export const SideBarContext = createContext<SideBarContextType | undefined>(undefined);
 
 export function SideBarProvider({ children }: { children: React.ReactNode }) {
-  const [isOpen, setIsOpen] = useState(true); // Cambiar a false
+  const [isOpen, setIsOpen] = useState(false);
 
   const closeSideBar = () => {
     setIsOpen(false);

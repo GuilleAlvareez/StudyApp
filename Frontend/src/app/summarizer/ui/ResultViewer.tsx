@@ -6,6 +6,7 @@ import {
   FileText,
   X,
   BookOpenCheck,
+  Menu,
 } from "lucide-react";
 import { useFileContext } from "@/context/fileContext";
 import { useEffect, useMemo, useState } from "react";
@@ -17,9 +18,11 @@ import { DocumentLoadEvent, Viewer, Worker } from "@react-pdf-viewer/core";
 // Importa los estilos CSS
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
-import { Loader } from "./Loader";
+import { Loader } from "../../../components/Loader";
+import { useSideBar } from "@/context/SideBarContext";
 
 export function ResultViewer() {
+  const { toggleSideBar } = useSideBar();
   const { file, summaryFile, removeFile, clearFile } = useFileContext();
   const { summarize, loading } = useSummarizer();
   const [numPages, setNumPages] = useState<number | null>(null);
@@ -41,7 +44,6 @@ export function ResultViewer() {
       setFileData(null);
     }
   }, [displayFile]);
-
 
   // const fileUrl = useMemo(() => {
   //     if (displayFile) {
@@ -92,12 +94,14 @@ export function ResultViewer() {
   return (
     <div className="flex flex-col items-center text-start space-y-6 h-full w-full lg:py-6 lg:px-10 tracking-wide">
       <div className="flex flex-col w-full mb-15 lg:mb-15">
-        {/* <button onClick={toggleSideBar}>
-                    <Menu className="w-6 h-6 stroke-1 mr-4"/>
-                    </button> */}
-        <h2 className="text-4xl font-bold text-slate-800 mb-2">
-          Crea tu Resumen
-        </h2>
+        <div className="flex">
+          <button onClick={toggleSideBar}>
+            <Menu className="w-6 h-6 stroke-1 mr-4" />
+          </button>
+          <h2 className="text-4xl font-bold text-slate-800 mb-2">
+            Crea tu Resumen
+          </h2>
+        </div>
         <p className="text-slate-500">
           Transforma tus documentos en resúmenes claros y concisos en segundos.
         </p>
@@ -126,12 +130,12 @@ export function ResultViewer() {
                 {/* Loader superpuesto mientras se resume */}
                 {loading && (
                   <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center z-10">
-                    <Loader />
+                    <Loader text="Generando resumen"/>
                   </div>
                 )}
               </>
             ) : (
-              <Loader />
+              <Loader text="Generando resumen"/>
             )}
           </div>
         </div>
@@ -173,7 +177,7 @@ export function ResultViewer() {
                   <Download className="w-5 h-5 stroke-2 mr-2" />
                   Descargar resumen
                 </button>
-                
+
                 <button
                   onClick={removeFile}
                   className="w-full flex items-center justify-center text-slate-700 font-semibold py-3 px-6 rounded-lg bg-white hover:bg-slate-50 duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-0.5 disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed disabled:transform-none"

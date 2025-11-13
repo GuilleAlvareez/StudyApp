@@ -6,11 +6,13 @@ import { useQuickNotesContext } from "../context/QuickNotesContex";
 import { useState, useRef, useEffect } from "react";
 import JSZip from "jszip";
 import html2canvas from "html2canvas";
+import NotesLoader from "./NotesLoader";
+import { Loader } from "@/components/Loader";
 
 // Hook personalizado para detectar el tamaño de la ventana
 function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
-    width: typeof window !== 'undefined' ? window.innerWidth : 1024,
+    width: typeof window !== "undefined" ? window.innerWidth : 1024,
   });
 
   useEffect(() => {
@@ -20,17 +22,17 @@ function useWindowSize() {
       });
     }
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     handleResize();
 
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return windowSize;
 }
 
 export function Content() {
-  const { notes } = useQuickNotesContext();
+  const { notes, loading } = useQuickNotesContext();
   const [currentPage, setCurrentPage] = useState(1);
   const { width } = useWindowSize();
 
@@ -121,7 +123,7 @@ export function Content() {
           <p className="text-slate-800 font-semibold text-xl mb-6">
             Notas generadas
           </p>
-          { notes.length > 0 && (
+          {notes.length > 0 && (
             <button
               onClick={handleDownloadZip}
               className="flex cursor-pointer justify-center items-center h-full hover:underline"
@@ -130,72 +132,79 @@ export function Content() {
             </button>
           )}
         </div>
-        {notes.length === 0 ? (
-          <div className="flex flex-1 flex-col items-center justify-center">
-            <FileUp className="w-20 h-20 stroke-1 text-icons" />
-            <p className="text-xl text-[#808290]">Tus notas apareceran aqui</p>
-            <p className="text-xl text-[#808290]">
-              Sube tu documento y pulsa en &quot;Generar notas&quot; para
-              empezar
-            </p>
-          </div>
-        ) : (
-          <div className="flex flex-col flex-1">
-            <div className="grid grid-cols-1 2xl:grid-cols-2 gap-6 flex-1">
-              {currentNotes.map((note, index) => (
-                <PostIt
-                  ref={(el) => {
-                    postitRefs.current[startIndex + index] = el;
-                  }}
-                  key={startIndex + index}
-                  header={note.header}
-                  content={note.content}
-                  color={colors[(startIndex + index) % colors.length]}
-                  inclination={`note-tilt-${(index % 4) + 1}`}
-                />
-              ))}
+
+        {!loading ? (
+          notes.length === 0 ? (
+            <div className="flex flex-1 flex-col items-center justify-center">
+              <FileUp className="w-20 h-20 stroke-1 text-icons" />
+              <p className="text-xl text-[#808290]">
+                Tus notas aparecerán aquí
+              </p>
+              <p className="text-xl text-[#808290]">
+                Sube tu documento y pulsa en &quot;Generar notas&quot; para
+                empezar
+              </p>
             </div>
-
-            {totalPages > 1 && (
-              <div className="flex items-center justify-center gap-4 mt-8 pt-4 border-t border-gray-200">
-                <button
-                  onClick={goToPrevious}
-                  disabled={currentPage === 1}
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                  Anterior
-                </button>
-
-                <div className="flex gap-2">
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                    (page) => (
-                      <button
-                        key={page}
-                        onClick={() => goToPage(page)}
-                        className={`px-3 py-2 rounded-lg border ${
-                          currentPage === page
-                            ? "bg-indigo-500 text-white border-indigo-500"
-                            : "border-gray-300 hover:bg-gray-50"
-                        }`}
-                      >
-                        {page}
-                      </button>
-                    )
-                  )}
-                </div>
-
-                <button
-                  onClick={goToNext}
-                  disabled={currentPage === totalPages}
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                >
-                  Siguiente
-                  <ChevronRight className="w-4 h-4" />
-                </button>
+          ) : (
+            <div className="flex flex-col flex-1">
+              <div className="grid grid-cols-1 2xl:grid-cols-2 gap-6 flex-1">
+                {currentNotes.map((note, index) => (
+                  <PostIt
+                    ref={(el) => {
+                      postitRefs.current[startIndex + index] = el;
+                    }}
+                    key={startIndex + index}
+                    header={note.header}
+                    content={note.content}
+                    color={colors[(startIndex + index) % colors.length]}
+                    inclination={`note-tilt-${(index % 4) + 1}`}
+                  />
+                ))}
               </div>
-            )}
-          </div>
+
+              {totalPages > 1 && (
+                <div className="flex items-center justify-center gap-4 mt-8 pt-4 border-t border-gray-200">
+                  <button
+                    onClick={goToPrevious}
+                    disabled={currentPage === 1}
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                    Anterior
+                  </button>
+
+                  <div className="flex gap-2">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                      (page) => (
+                        <button
+                          key={page}
+                          onClick={() => goToPage(page)}
+                          className={`px-3 py-2 rounded-lg border ${
+                            currentPage === page
+                              ? "bg-indigo-500 text-white border-indigo-500"
+                              : "border-gray-300 hover:bg-gray-50"
+                          }`}
+                        >
+                          {page}
+                        </button>
+                      )
+                    )}
+                  </div>
+
+                  <button
+                    onClick={goToNext}
+                    disabled={currentPage === totalPages}
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                  >
+                    Siguiente
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
+            </div>
+          )
+        ) : (
+          <Loader text="Generando notas" />
         )}
       </div>
     </div>

@@ -20,21 +20,26 @@ export function SummarizerPanel() {
     removeFile,
     inputRef,
   } = useFileContext();
+  const { isOpen, toggleSideBar } = useSideBar();
   // const { toggleSideBar } = useSideBar();
 
   // const { summarize } = useSummarizer();
 
   return (
     <div className="flex flex-col items-center text-start space-y-6 h-full w-full lg:py-6 lg:px-10 tracking-wide">
-      <div className="flex flex-col w-full mb-15 lg:mb-35">
-        {/* <button onClick={toggleSideBar}>
-          <Menu className="w-6 h-6 stroke-1 mr-4"/>
-        </button> */}
-        <h2 className="text-4xl font-bold text-slate-800 mb-2">
-          Crea tu Resumen
-        </h2>
+      <div className="flex flex-col w-full mb-15 lg:mb-15">
+        <div className="flex">
+          {!isOpen && (
+            <button onClick={toggleSideBar} className="xl:hidden">
+              <Menu className="w-6 h-6 stroke-1 mr-4" />
+            </button>
+          )}
+          <h2 className="text-4xl font-bold text-slate-800 mb-2">
+            Crea tu Resumen
+          </h2>
+        </div>
         <p className="text-slate-500">
-          Transforma tus documentos en résumenes claros y concisos en segundos.
+          Transforma tus documentos en resúmenes claros y concisos en segundos.
         </p>
       </div>
 

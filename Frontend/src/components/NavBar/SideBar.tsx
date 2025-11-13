@@ -8,13 +8,13 @@ export function SideBar() {
   const { isOpen, closeSideBar } = useSideBar();
 
   return (
-    <nav className={`h-screen flex flex-col py-2 bg-white border-r border-gray-200 transition-all duration-300 ease-in-out overflow-hidden ${lato.className} ${isOpen ? 'w-64' : 'w-0'}`}>
-      
-      <div className="min-w-64 flex flex-col flex-1">
+    <nav className={`fixed top-0 left-0 h-screen w-[85%] sm:w-64 flex flex-col py-2 bg-white border-r border-gray-200 transition-transform duration-300 ease-in-out z-40 ${lato.className} ${isOpen ? 'translate-x-0' : '-translate-x-full'} xl:translate-x-0`}>
+
+      <div className="flex flex-col flex-1">
 
         <div className="flex items-center justify-between p-4">
           <h1 className={`flex items-center text-xl font-bold ${poppins.className}`}><Notebook className="w-6 h-6 stroke-2 mr-2 text-indigo-600"/>StudyApp</h1>
-          <button onClick={closeSideBar} className="p-1 rounded-md hover:bg-gray-200">
+          <button onClick={closeSideBar} className="p-1 rounded-md hover:bg-gray-200 xl:hidden">
             <X className="w-6 h-6 stroke-2" />
           </button>
         </div>

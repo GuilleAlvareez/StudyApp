@@ -1,6 +1,6 @@
 import './Loader.css';
 
-export function Loader() {
+export function Loader({ text }: { text: string }) {
   return (
     <div className="flex flex-col items-center justify-center h-full w-full text-center">
       {/* Spinner minimalista */}
@@ -15,7 +15,7 @@ export function Loader() {
       </p>
 
       <p className="text-slate-500 text-sm mt-1">
-        Generando resumen
+        {text}
       </p>
     </div>
   );
