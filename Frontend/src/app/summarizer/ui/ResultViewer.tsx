@@ -141,7 +141,7 @@ export function ResultViewer() {
         </div>
 
         {/* Botón de Descarga */}
-        <section className="flex flex-col gap-3 py-40 px-4">
+        <section className="flex flex-col gap-3  py-10 lg:py-40 px-4">
           <p className="text-3xl font-semibold">¡Listo para empezar!</p>
           <p className="text-lg text-slate-800">
             Su archivo ha sido cargado. ¿Qué te gustaría hacer ahora?

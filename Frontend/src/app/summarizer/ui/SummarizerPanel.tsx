@@ -53,7 +53,7 @@ export function SummarizerPanel() {
       />
 
       {/* Área de Carga de Archivos */}
-      <div className="space-y-3 w-5/6 h-3/5">
+      <div className="space-y-3 w-5/6 h-3/5 mt-20">
         <div
           onClick={pressInput}
           onDragEnter={onDragEnter}

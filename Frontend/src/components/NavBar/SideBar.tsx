@@ -29,7 +29,7 @@ export function SideBar() {
         </div>
 
         {/* Divider */}
-        <div className="w-5/6 mx-auto border-t border-gray-200"/>
+        {/* <div className="w-5/6 mx-auto border-t border-gray-200"/>
 
         <div className="w-5/6 mx-auto py-4">
           <section>
@@ -47,8 +47,7 @@ export function SideBar() {
               </button>
             </div>
           </section>
-        </div>
-
+        </div> */}
       </div>
     </nav>
   );

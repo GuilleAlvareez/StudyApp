@@ -12,7 +12,7 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
       {/* Overlay para pantallas pequeñas */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-30 xl:hidden"
+          className="fixed inset-0 bg-black/20 z-30 xl:hidden"
           onClick={closeSideBar}
         />
       )}
