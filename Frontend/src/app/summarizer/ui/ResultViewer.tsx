@@ -6,10 +6,9 @@ import {
   FileText,
   X,
   BookOpenCheck,
-  Menu,
 } from "lucide-react";
 import { useFileContext } from "@/context/fileContext";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSummarizer } from "../hooks/useSummarizer";
 
 // Importa los componentes y estilos de la nueva librería
@@ -19,12 +18,10 @@ import { DocumentLoadEvent, Viewer, Worker } from "@react-pdf-viewer/core";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { Loader } from "../../../components/Loader";
-import { useSideBar } from "@/context/SideBarContext";
 import { Header } from "@/components/Header";
 
 export function ResultViewer() {
-  const { toggleSideBar } = useSideBar();
-  const { file, summaryFile, removeFile, clearFile } = useFileContext();
+  const { file, summaryFile, removeFile } = useFileContext();
   const { summarize, loading } = useSummarizer();
   const [numPages, setNumPages] = useState<number | null>(null);
   const [fileData, setFileData] = useState<Uint8Array | null>(null);

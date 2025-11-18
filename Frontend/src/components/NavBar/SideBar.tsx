@@ -1,6 +1,6 @@
 'use client'
 import { NavLinks } from "./NavLinks";
-import { LogOut, Notebook, X } from "lucide-react"; // Importa un ícono para logout
+import { Notebook, X } from "lucide-react"; // Importa un ícono para logout
 import { useSideBar } from "@/context/SideBarContext";
 import { poppins, lato } from "@/app/ui/fonts";
 
