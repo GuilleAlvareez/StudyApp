@@ -1,4 +1,5 @@
 'use client';
+import { SideBarContext, useSideBar } from "@/context/SideBarContext";
 import { Menu, FileText, Cpu, UploadCloud, WandSparkles, BookOpenCheck, Lightbulb, ArrowRight, Sparkles, Download, ChevronRight, Check } from "lucide-react";
 import React, { useState, useEffect, useRef } from "react";
 
@@ -6,11 +7,11 @@ import React, { useState, useEffect, useRef } from "react";
 const poppins = { className: 'font-sans' };
 const lato = { className: 'font-sans' };
 
-// Context simulado
-const useSideBar = () => ({
-  isOpen: false,
-  toggleSideBar: () => {}
-});
+// // Context simulado
+// const useSideBar = () => ({
+//   isOpen: false,
+//   toggleSideBar: () => {}
+// });
 
 // --- Hook Personalizado para Animaciones en Scroll ---
 const useScrollAnimation = () => {
