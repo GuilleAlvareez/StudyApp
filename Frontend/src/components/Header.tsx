@@ -1,7 +1,7 @@
 import { useSideBar } from "@/context/SideBarContext";
 import { Menu } from "lucide-react";
 
-export function Header() {
+export function Header({ title, description }: { title: string; description: string }) {
   const { isOpen, toggleSideBar } = useSideBar();
 
   return (
@@ -12,12 +12,12 @@ export function Header() {
             <Menu className="w-6 h-6 stroke-1 mr-4" />
           </button>
         )}
-        <h2 className="text-4xl font-bold text-slate-800 mb-2">
-          Notas rapidas
-        </h2>
+        <h1 className="text-4xl font-bold text-slate-800 mb-2">
+          {title}
+        </h1>
       </div>
       <p className="text-slate-500">
-        Sube tu archivo y genera notas rapidas en base al contenido.
+        {description}
       </p>
     </div>
   );

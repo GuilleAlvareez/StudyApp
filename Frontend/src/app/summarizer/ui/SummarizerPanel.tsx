@@ -4,6 +4,7 @@ import { useFileContext } from "@/context/fileContext";
 import { useSideBar } from "@/context/SideBarContext";
 import { useSummarizer } from "../hooks/useSummarizer";
 import { BaselineCloudUpload } from "@/app/quicknotes/ui/icons";
+import { Header } from "@/components/Header";
 
 export function SummarizerPanel() {
   const {
@@ -27,21 +28,22 @@ export function SummarizerPanel() {
 
   return (
     <div className="flex flex-col items-center text-start space-y-6 h-full w-full lg:py-6 lg:px-10 tracking-wide">
-      <div className="flex flex-col w-full mb-15 lg:mb-15">
+      {/* <div className="flex flex-col w-full mb-15 lg:mb-15">
         <div className="flex">
           {!isOpen && (
             <button onClick={toggleSideBar} className="xl:hidden">
               <Menu className="w-6 h-6 stroke-1 mr-4" />
             </button>
           )}
-          <h2 className="text-4xl font-bold text-slate-800 mb-2">
+          <h1 className="text-4xl font-bold text-slate-800 mb-2">
             Crea tu Resumen
-          </h2>
+          </h1>
         </div>
         <p className="text-slate-500">
           Transforma tus documentos en resúmenes claros y concisos en segundos.
         </p>
-      </div>
+      </div> */}
+      <Header title="Crea tu Resumen" description="Transforma tus documentos en resúmenes claros y concisos en segundos." />
 
       <input
         type="file"

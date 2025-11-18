@@ -1,5 +1,5 @@
 "use client";
-import { Header } from "./ui/Header";
+import { Header } from "../../components/Header";
 import { Content } from "./ui/Content";
 import { useFileContext } from "@/context/fileContext";
 import { useEffect } from "react";
@@ -18,7 +18,7 @@ export default function QuickNotesPage() {
     <QuickNotesProvider>
       <div className="h-screen w-full p-8 bg-[#f8f9fa] overflow-x-hidden">
         <div className="flex flex-col h-full w-full items-center text-start lg:py-6 lg:px-10 tracking-wide">
-          <Header />
+          <Header title="Notas rapidas" description="Sube tu archivo y genera notas rapidas en base al contenido." />
           <Content />
         </div>
       </div>
