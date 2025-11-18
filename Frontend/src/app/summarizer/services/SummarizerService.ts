@@ -5,7 +5,7 @@ export function summarizerService() {
     const formData = new FormData();
     formData.append('pdfFile', file);
 
-    const response = await fetch('http://localhost:3000/api/summarizer', {
+    const response = await fetch('/api/summarizer', {
       method: 'POST',
       body: formData,
     });

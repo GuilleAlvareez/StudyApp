@@ -15,7 +15,7 @@ export function quickNotesService() {
       markdownText: markdownText,
     }
 
-    const response = await fetch('http://localhost:3000/api/quickNotes', {
+    const response = await fetch('/api/quickNotes', {
       method: 'POST',
       body: JSON.stringify(bodyToSend),
     });
