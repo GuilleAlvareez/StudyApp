@@ -107,7 +107,7 @@ export async function convertMarkdownToPdf(markdownText: string): Promise<Buffer
         doc.setFont(undefined, 'normal');
         
         // Procesar texto con formato inline (negrita, cursiva)
-        let processedLine = line.trim();
+        const processedLine = line.trim();
         
         // Dividir líneas largas
         const splitText = doc.splitTextToSize(processedLine, 170);
