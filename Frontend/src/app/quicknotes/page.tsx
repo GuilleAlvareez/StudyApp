@@ -4,6 +4,12 @@ import { Content } from "./ui/Content";
 import { useFileContext } from "@/context/fileContext";
 import { useEffect } from "react";
 import { QuickNotesProvider } from "./context/QuickNotesContex";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Creador de Apuntes y Notas Automáticas con IA',
+  description: 'Transforma cualquier documento en notas de estudio perfectas para repasar. Nuestra IA extrae las ideas clave y te las presenta en un formato fácil de memorizar.',
+};
 
 export default function QuickNotesPage() {
   const { clearFile } = useFileContext();
