@@ -5,6 +5,7 @@ import { SideBarProvider } from "@/context/SideBarContext";
 import { SideBar } from "@/components/NavBar/SideBar";
 import { FileProvider } from "@/context/fileContext";
 import { LayoutContent } from "./LayoutContent";
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: {
@@ -27,6 +28,7 @@ export default function RootLayout({
         <SideBarProvider>
           <LayoutContent>
             <FileProvider>
+              <Analytics />
               {children}
             </FileProvider>
           </LayoutContent>
