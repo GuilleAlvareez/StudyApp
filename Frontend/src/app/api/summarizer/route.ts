@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
             },
             {
               role: "user",
-              content: markdownText,
+              content: `Resume el siguiente texto. No lo analices ni crees guías de estudio sobre él. Empieza directamente con el contenido resumido. Aquí está el texto:\n\n${markdownText}`,
             },
           ],
         }),
