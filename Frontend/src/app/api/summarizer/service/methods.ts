@@ -49,31 +49,31 @@ export async function convertMarkdownToPdf(markdownText: string): Promise<Buffer
       if (line.startsWith('# ')) {
         // H1 - Título principal
         doc.setFontSize(18);
-        doc.setFont(undefined, 'bold');
+        doc.setFont("", 'bold');
         doc.text(line.substring(2).trim(), 15, yPosition);
         yPosition += 12;
       } else if (line.startsWith('## ')) {
         // H2 - Subtítulo
         doc.setFontSize(16);
-        doc.setFont(undefined, 'bold');
+        doc.setFont("", 'bold');
         doc.text(line.substring(3).trim(), 15, yPosition);
         yPosition += 10;
       } else if (line.startsWith('### ')) {
         // H3 - Subtítulo menor
         doc.setFontSize(14);
-        doc.setFont(undefined, 'bold');
+        doc.setFont("", 'bold');
         doc.text(line.substring(4).trim(), 15, yPosition);
         yPosition += 8;
       } else if (line.startsWith('#### ')) {
         // H4 - Subtítulo menor
         doc.setFontSize(12);
-        doc.setFont(undefined, 'bold');
+        doc.setFont("", 'bold');
         doc.text(line.substring(5).trim(), 15, yPosition);
         yPosition += 7;
       } else if (line.startsWith('- ') || line.startsWith('* ')) {
         // Lista con viñetas
         doc.setFontSize(11);
-        doc.setFont(undefined, 'normal');
+        doc.setFont("", 'normal');
         const bulletText = '• ' + line.substring(2).trim();
         const splitText = doc.splitTextToSize(bulletText, 160);
         doc.text(splitText, 20, yPosition);
@@ -81,14 +81,14 @@ export async function convertMarkdownToPdf(markdownText: string): Promise<Buffer
       } else if (/^\d+\.\s/.test(line)) {
         // Lista numerada
         doc.setFontSize(11);
-        doc.setFont(undefined, 'normal');
+        doc.setFont("", 'normal');
         const splitText = doc.splitTextToSize(line.trim(), 160);
         doc.text(splitText, 20, yPosition);
         yPosition += splitText.length * 5;
       } else if (line.startsWith('**') && line.endsWith('**')) {
         // Texto en negrita
         doc.setFontSize(11);
-        doc.setFont(undefined, 'bold');
+        doc.setFont("", 'bold');
         const boldText = line.substring(2, line.length - 2);
         const splitText = doc.splitTextToSize(boldText, 170);
         doc.text(splitText, 15, yPosition);
@@ -96,7 +96,7 @@ export async function convertMarkdownToPdf(markdownText: string): Promise<Buffer
       } else if (line.startsWith('> ')) {
         // Cita
         doc.setFontSize(10);
-        doc.setFont(undefined, 'italic');
+        doc.setFont("", 'italic');
         const quoteText = line.substring(2).trim();
         const splitText = doc.splitTextToSize(quoteText, 160);
         doc.text(splitText, 25, yPosition);
@@ -104,7 +104,7 @@ export async function convertMarkdownToPdf(markdownText: string): Promise<Buffer
       } else if (line.trim() !== '') {
         // Texto normal
         doc.setFontSize(11);
-        doc.setFont(undefined, 'normal');
+        doc.setFont("", 'normal');
         
         // Procesar texto con formato inline (negrita, cursiva)
         const processedLine = line.trim();
