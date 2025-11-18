@@ -3,6 +3,7 @@ import { SummarizerPanel } from "./ui/SummarizerPanel";
 import { ResultViewer } from "./ui/ResultViewer";
 import { useFileContext } from "@/context/fileContext";
 import { useEffect } from "react";
+import type { Metadata } from "next";
 
 export default function SummarizerPage() {
   const { file, clearFile } = useFileContext();

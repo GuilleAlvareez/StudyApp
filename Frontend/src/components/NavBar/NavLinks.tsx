@@ -1,16 +1,16 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookOpenCheck, BookText, Grid2X2Check, House, StickyNote, Lightbulb, FileQuestionMark } from "lucide-react";
+import { BookOpenCheck, House, Lightbulb } from "lucide-react";
 
 export function NavLinks() {
   const pathname = usePathname();
 
   const links = [
-    { href: "/", label: "Home", icon: House },
-    { href: "/summarizer", label: "Summarizer", icon: BookOpenCheck },
-    { href: "/quicknotes", label: "QuickNotes", icon: Lightbulb },
-    { href: "/exam", label: "Exam", icon: FileQuestionMark },
+    { href: "/", label: "Inicio", icon: House },
+    { href: "/summarizer", label: "Resumir", icon: BookOpenCheck },
+    { href: "/quicknotes", label: "Notas rapidas", icon: Lightbulb },
+    // { href: "/exam", label: "Exam", icon: FileQuestionMark },
   ];
 
   return (
