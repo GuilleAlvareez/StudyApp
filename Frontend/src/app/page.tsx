@@ -772,7 +772,7 @@ const Footer = () => {
             La plataforma de IA que revoluciona la forma en que estudias.
           </p>
           <p className="text-sm text-slate-500">
-            &copy; 2024 StudyApp. Todos los derechos reservados.
+            &copy; 2025 StudyApp. Todos los derechos reservados.
           </p>
         </div>
       </div>
@@ -802,7 +802,7 @@ export default function Home() {
         <DemoSection />
         <TestimonialsSection />
         <FinalCTASection />
-        <Footer />
+        <Footeer />
       </main>
     </div>
   );
