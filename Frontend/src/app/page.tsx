@@ -802,7 +802,7 @@ export default function Home() {
         <DemoSection />
         <TestimonialsSection />
         <FinalCTASection />
-        <Footeer />
+        <Footer />
       </main>
     </div>
   );
