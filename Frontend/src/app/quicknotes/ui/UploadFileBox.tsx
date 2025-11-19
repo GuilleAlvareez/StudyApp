@@ -9,6 +9,7 @@ export function UploadFileBox() {
     file,
     isDragging,
     MAX_FILE_SIZE,
+    error,
     pressInput,
     onDragEnter,
     onDragOver,
@@ -73,6 +74,11 @@ export function UploadFileBox() {
               <p className="text-xs text-textGray">
                 o haz clic para seleccionarlo
               </p>
+              {error !== "" && (
+                <p className="w-full border border-red-300 bg-red-100 rounded-lg p-3 text-red-500 text-sm">
+                  {error}
+                </p>
+              )}
 
               {/* <p className="absolute bottom-4 text-xs p-2 text-slate-500 text-center">
             Soporta archivos PDF de hasta 15MB
@@ -86,7 +92,9 @@ export function UploadFileBox() {
             <FileText className="w-5 h-5 text-red-700 flex-shrink-0" />
 
             <div className="flex flex-col min-w-0 flex-1">
-              <span className="text-sm font-semibold truncate">{file?.name}</span>
+              <span className="text-sm font-semibold truncate">
+                {file?.name}
+              </span>
               <span className="text-sm font-medium text-slate-800">
                 {formatFileSize(file)}
               </span>

@@ -15,6 +15,7 @@ interface FileContextType {
   onDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
   handleDrop: (e: React.DragEvent<HTMLDivElement>) => void;
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  removeError: () => void;
   removeFile: () => void;
   setSummaryFile: (file: File | null) => void;
   clearFile: () => void;
@@ -109,9 +110,14 @@ export const FileProvider = ({ children }: { children: React.ReactNode }) => {
     if (inputRef.current) inputRef.current.value = "";
   };
 
+  const removeError = () => {
+    setError("");
+  };
+
   const clearFile = () => {
     setFile(null);
     setIsDragging(false);
+    setError("");
     // Resetea cualquier otro estado relacionado con el archivo
     // Por ejemplo: setFileName(''); setError(null);
     if (inputRef.current) {
@@ -136,6 +142,7 @@ export const FileProvider = ({ children }: { children: React.ReactNode }) => {
     removeFile,
     setSummaryFile,
     clearFile,
+    removeError,
   };
 
   return <FileContext.Provider value={value}>{children}</FileContext.Provider>;
