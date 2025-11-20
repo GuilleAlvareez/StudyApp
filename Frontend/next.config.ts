@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: "worker-src 'self' blob: https://unpkg.com; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://unpkg.com;",
+            value: "worker-src 'self' blob: https://unpkg.com; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://unpkg.com https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com;",
           },
         ],
       },

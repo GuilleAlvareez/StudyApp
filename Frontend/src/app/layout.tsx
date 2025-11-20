@@ -5,7 +5,8 @@ import { SideBarProvider } from "@/context/SideBarContext";
 import { SideBar } from "@/components/NavBar/SideBar";
 import { FileProvider } from "@/context/fileContext";
 import { LayoutContent } from "./LayoutContent";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
   title: {
@@ -22,18 +23,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`antialiased`}
-      >
+      <body className={`antialiased`}>
         <SideBarProvider>
           <LayoutContent>
             <FileProvider>
+              {/* Analytics de Vercel que ya tenías */}
               <Analytics />
               {children}
             </FileProvider>
           </LayoutContent>
         </SideBarProvider>
       </body>
+      {/* 2. Añadir el componente GoogleAnalytics aquí, fuera del body */}
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || ""} />
     </html>
   );
 }

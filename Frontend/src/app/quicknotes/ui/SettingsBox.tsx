@@ -15,6 +15,7 @@ export function SettingsBox() {
   const regexDecimal = /^\d+[.,]\d*$/;
   // Detectar solo números enteros
   const regexInteger = /^[0-9]+$/;
+  const regexNumAllowed = /^(1[0-6]|[1-9])$/;
 
   const validateInput = (val: string) => {
     setValue(val);
@@ -32,6 +33,12 @@ export function SettingsBox() {
     // 2️⃣ Luego comprobamos si son solo números enteros
     if (!regexInteger.test(val)) {
       setError("Solo se permiten números");
+      return;
+    }
+
+    // 3️⃣ Comprobamos el rango permitido (1-16)
+    if (!regexNumAllowed.test(val)) {
+      setError("El número debe estar entre 1 y 16");
       return;
     }
 
@@ -60,7 +67,7 @@ export function SettingsBox() {
           ref={inputRef}
           type="text"
           onChange={(e) => validateInput(e.target.value)}
-          placeholder="1. 2. 3."
+          placeholder="1 - 16"
           className={`h-10 rounded-lg border px-3 mt-1 focus:outline-none ${
             error
               ? "border-red-300 bg-red-100 mb-1"

@@ -7,12 +7,6 @@ import React, { useState, useEffect, useRef } from "react";
 const poppins = { className: 'font-sans' };
 const lato = { className: 'font-sans' };
 
-// // Context simulado
-// const useSideBar = () => ({
-//   isOpen: false,
-//   toggleSideBar: () => {}
-// });
-
 // --- Hook Personalizado para Animaciones en Scroll ---
 const useScrollAnimation = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -795,7 +789,7 @@ export default function Home() {
         </button>
       )}
       
-      <main>
+      <main>  
         <HeroSection />
         <HowItWorksSection />
         <FeaturesSection />
