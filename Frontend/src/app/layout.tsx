@@ -7,11 +7,12 @@ import { FileProvider } from "@/context/fileContext";
 import { LayoutContent } from "./LayoutContent";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalytics } from '@next/third-parties/google';
+import { CookieConsent } from "@/components/CookieConsent";
 
 export const metadata: Metadata = {
   title: {
     template: '%s | StudyApp',
-    default: 'StudyApp: Herramientas de Estudio con IA para Estudiantes', // Título por defecto para la página principal
+    default: 'StudyApp: Herramientas de Estudio con IA para Estudiantes',
   },
   description: "Potencia tu aprendizaje con StudyApp. Resume documentos, crea notas automáticas y estudia de forma más eficiente con nuestras herramientas de IA gratuitas.",
 };
@@ -27,14 +28,13 @@ export default function RootLayout({
         <SideBarProvider>
           <LayoutContent>
             <FileProvider>
-              {/* Analytics de Vercel que ya tenías */}
               <Analytics />
               {children}
             </FileProvider>
           </LayoutContent>
         </SideBarProvider>
+        <CookieConsent />
       </body>
-      {/* 2. Añadir el componente GoogleAnalytics aquí, fuera del body */}
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || ""} />
     </html>
   );
