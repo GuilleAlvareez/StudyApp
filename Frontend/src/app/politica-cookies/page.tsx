@@ -212,7 +212,7 @@ export default function PoliticaCookies() {
                 </p>
               </section>
 
-              <section>
+              {/* <section>
                 <h2 className="text-2xl font-bold text-slate-900 mb-4">8. Más Información</h2>
                 <p>
                   Si tienes alguna pregunta sobre nuestra Política de Cookies o sobre cómo utilizamos las cookies, 
@@ -227,7 +227,7 @@ export default function PoliticaCookies() {
                     Política de Privacidad
                   </a>.
                 </p>
-              </section>
+              </section> */}
             </div>
 
             <div className="mt-12 pt-8 border-t border-slate-200">

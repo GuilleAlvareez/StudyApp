@@ -130,7 +130,7 @@ export default function PoliticaPrivacidad() {
                 </p>
               </section>
 
-              <section>
+              {/* <section>
                 <h2 className="text-2xl font-bold text-slate-900 mb-4">10. Contacto</h2>
                 <p>
                   Si tienes preguntas sobre esta Política de Privacidad o sobre cómo manejamos tu información personal, 
@@ -139,7 +139,7 @@ export default function PoliticaPrivacidad() {
                 <p className="mt-3 font-semibold">
                   Email: privacy@studyapp.com
                 </p>
-              </section>
+              </section> */}
             </div>
 
             <div className="mt-12 pt-8 border-t border-slate-200">

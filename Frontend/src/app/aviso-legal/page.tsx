@@ -146,7 +146,7 @@ export default function AvisoLegal() {
                 </p>
               </section>
 
-              <section>
+              {/* <section>
                 <h2 className="text-2xl font-bold text-slate-900 mb-4">10. Contacto</h2>
                 <p>
                   Para cualquier consulta relacionada con este Aviso Legal, puedes contactarnos en:
@@ -154,7 +154,7 @@ export default function AvisoLegal() {
                 <p className="mt-3 font-semibold">
                   Email: legal@studyapp.com
                 </p>
-              </section>
+              </section> */}
             </div>
 
             <div className="mt-12 pt-8 border-t border-slate-200">

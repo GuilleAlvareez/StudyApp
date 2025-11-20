@@ -9,7 +9,7 @@ export const Footer = () => {
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 rounded-full blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-4 py-16 relative z-10">
+      <div className="container mx-auto px-4 py-14 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Columna 1: Sobre StudyApp */}
           <div className="space-y-4">
@@ -38,12 +38,12 @@ export const Footer = () => {
                   QuickNotes
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="/exam" className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 flex items-center gap-2 group">
                   <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   Generador de Exámenes
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -58,21 +58,15 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="/#" className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 flex items-center gap-2 group">
+                <a href="#how-it-works" className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 flex items-center gap-2 group">
                   <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   Guía de Uso
                 </a>
               </li>
               <li>
-                <a href="/#" className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 flex items-center gap-2 group">
+                <a href="#testimonials" className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 flex items-center gap-2 group">
                   <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="/#" className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 flex items-center gap-2 group">
-                  <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                  FAQ
+                  Reseñas
                 </a>
               </li>
             </ul>
@@ -100,12 +94,12 @@ export const Footer = () => {
                   Política de Cookies
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="/#" className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 flex items-center gap-2 group">
                   <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   Términos de Servicio
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
