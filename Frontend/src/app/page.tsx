@@ -1,4 +1,5 @@
 'use client';
+import { Footer } from "@/components/Footer";
 import { SideBarContext, useSideBar } from "@/context/SideBarContext";
 import { Menu, FileText, Cpu, UploadCloud, WandSparkles, BookOpenCheck, Lightbulb, ArrowRight, Sparkles, Download, ChevronRight, Check } from "lucide-react";
 import React, { useState, useEffect, useRef } from "react";
@@ -756,23 +757,23 @@ const FinalCTASection = () => {
 };
 
 // --- SUB-COMPONENTE: Footer ---
-const Footer = () => {
-  return (
-    <footer className="bg-slate-900 text-slate-300 py-8">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center space-y-4">
-          <h3 className="text-white font-bold text-lg">StudyApp</h3>
-          <p className="text-sm text-slate-400 text-center max-w-md">
-            La plataforma de IA que revoluciona la forma en que estudias.
-          </p>
-          <p className="text-sm text-slate-500">
-            &copy; 2025 StudyApp. Todos los derechos reservados.
-          </p>
-        </div>
-      </div>
-    </footer>
-  );
-};
+// const Footer = () => {
+//   return (
+//     <footer className="bg-slate-900 text-slate-300 py-8">
+//       <div className="container mx-auto px-4">
+//         <div className="flex flex-col items-center space-y-4">
+//           <h3 className="text-white font-bold text-lg">StudyApp</h3>
+//           <p className="text-sm text-slate-400 text-center max-w-md">
+//             La plataforma de IA que revoluciona la forma en que estudias.
+//           </p>
+//           <p className="text-sm text-slate-500">
+//             &copy; 2025 StudyApp. Todos los derechos reservados.
+//           </p>
+//         </div>
+//       </div>
+//     </footer>
+//   );
+// };
 
 // --- COMPONENTE PRINCIPAL: Home Mejorado ---
 export default function Home() {
