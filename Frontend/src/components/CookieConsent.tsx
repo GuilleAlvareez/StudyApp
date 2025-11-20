@@ -47,7 +47,7 @@ export const CookieConsent = () => {
                 </h3>
                 <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300">
                   Utilizamos cookies para mejorar tu experiencia, analizar el tráfico y personalizar el contenido. 
-                  Al hacer clic en "Aceptar", consientes el uso de todas las cookies.
+                  Al hacer clic en &quot;Aceptar&quot;, consientes el uso de todas las cookies.
                 </p>
               </div>
 
