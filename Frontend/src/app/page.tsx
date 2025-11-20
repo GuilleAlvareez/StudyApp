@@ -1,7 +1,6 @@
 'use client';
 import { Footer } from "@/components/Footer";
-import { SideBarContext, useSideBar } from "@/context/SideBarContext";
-import { Menu, FileText, Cpu, UploadCloud, WandSparkles, BookOpenCheck, Lightbulb, ArrowRight, Sparkles, Download, ChevronRight, Check } from "lucide-react";
+import { FileText, Cpu, UploadCloud, WandSparkles, BookOpenCheck, Lightbulb, ArrowRight, Sparkles, Download, ChevronRight, Check } from "lucide-react";
 import React, { useState, useEffect, useRef } from "react";
 
 // Fonts simulados
@@ -777,19 +776,8 @@ const FinalCTASection = () => {
 
 // --- COMPONENTE PRINCIPAL: Home Mejorado ---
 export default function Home() {
-  const { isOpen, toggleSideBar } = useSideBar();
-
   return (
-    <div className="flex-1 w-full bg-white">
-      {!isOpen && (
-        <button
-          onClick={toggleSideBar}
-          className="fixed top-4 left-4 z-50 xl:hidden m-4 p-2 rounded-md hover:bg-gray-200 bg-white border border-gray-300 shadow-sm"
-        >
-          <Menu className="w-6 h-6 stroke-2"/>
-        </button>
-      )}
-      
+    <div className="w-full bg-white">
       <main>  
         <HeroSection />
         <HowItWorksSection />

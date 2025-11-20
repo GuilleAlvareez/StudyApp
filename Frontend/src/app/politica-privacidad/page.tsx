@@ -1,20 +1,8 @@
 'use client';
-import { Menu } from "lucide-react";
-import { useSideBar } from "@/context/SideBarContext";
 
 export default function PoliticaPrivacidad() {
-  const { isOpen, toggleSideBar } = useSideBar();
-
   return (
-    <div className="flex-1 w-full bg-white">
-      {!isOpen && (
-        <button
-          onClick={toggleSideBar}
-          className="fixed top-4 left-4 z-50 xl:hidden m-4 p-2 rounded-md hover:bg-gray-200 bg-white border border-gray-300 shadow-sm"
-        >
-          <Menu className="w-6 h-6 stroke-2"/>
-        </button>
-      )}
+    <div className="w-full bg-white">
       
       <main className="min-h-screen bg-gradient-to-b from-slate-50 to-white py-16 px-4">
         <div className="container mx-auto max-w-4xl">

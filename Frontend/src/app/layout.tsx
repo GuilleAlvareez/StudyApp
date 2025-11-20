@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { inter, montserrat } from "./ui/fonts";
-import { SideBarProvider } from "@/context/SideBarContext";
-import { SideBar } from "@/components/NavBar/SideBar";
 import { FileProvider } from "@/context/fileContext";
-import { LayoutContent } from "./LayoutContent";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { CookieConsent } from "@/components/CookieConsent";
+import { Navbar } from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: {
@@ -25,14 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased`}>
-        <SideBarProvider>
-          <LayoutContent>
-            <FileProvider>
-              <Analytics />
-              {children}
-            </FileProvider>
-          </LayoutContent>
-        </SideBarProvider>
+        <Navbar />
+        <FileProvider>
+          <Analytics />
+          {children}
+        </FileProvider>
         <CookieConsent />
       </body>
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || ""} />

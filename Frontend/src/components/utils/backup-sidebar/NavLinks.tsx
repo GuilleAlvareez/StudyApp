@@ -1,0 +1,35 @@
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { BookOpenCheck, House, Lightbulb } from "lucide-react";
+
+export function NavLinks() {
+  const pathname = usePathname();
+
+  const links = [
+    { href: "/", label: "Inicio", icon: House },
+    { href: "/summarizer", label: "Resumir", icon: BookOpenCheck },
+    { href: "/quicknotes", label: "Notas rapidas", icon: Lightbulb },
+    // { href: "/exam", label: "Exam", icon: FileQuestionMark },
+  ];
+
+  return (
+    <article>
+      {links.map((link) => {
+        const LinkIcon = link.icon;
+        return (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={`w-5/6 flex mb-2 mx-auto px-4 py-2 rounded-xl
+            ${pathname === link.href ? "text-indigo-600 bg-indigo-100 rounded-lg hover:text-indigo-600 hover:bg-indigo-100" : "text-gray-500 hover:bg-gray-100"}`}
+          >
+            <LinkIcon className="w-6 h-6 stroke-2 mr-2" />
+
+            <span className="font-semibold">{link.label}</span>
+          </Link>
+        );
+      })}
+    </article>
+  );
+}
