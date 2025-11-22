@@ -19,7 +19,7 @@ export default function SummarizerPage() {
   }, []);
 
   return (
-    <div className="h-screen w-full p-8 bg-[#f8f9fa]">
+    <div className="h-screen w-full p-8 pt-24 bg-[#f8f9fa]">
       <div className="h-full gap-8">
         {file ? (
           <div className="overflow-hidden h-full">

@@ -8,7 +8,7 @@ export function SideBar() {
   const { isOpen, closeSideBar } = useSideBar();
 
   return (
-    <nav className={`fixed top-0 left-0 h-screen w-[85%] sm:w-64 flex flex-col py-2 bg-white border-r border-gray-200 transition-transform duration-300 ease-in-out z-40 ${lato.className} ${isOpen ? 'translate-x-0' : '-translate-x-full'} xl:translate-x-0`}>
+    <nav className={`fixed top-0 left-0 h-screen w-[85%] sm:w-64 flex flex-col py-2 bg-transparent backdrop-blur-xl border-r border-gray-200 transition-transform duration-300 ease-in-out z-40 ${lato.className} ${isOpen ? 'translate-x-0' : '-translate-x-full'} xl:translate-x-0`}>
 
       <div className="flex flex-col flex-1">
 
