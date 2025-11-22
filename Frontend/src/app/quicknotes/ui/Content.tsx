@@ -6,7 +6,6 @@ import { useQuickNotesContext } from "../context/QuickNotesContex";
 import { useState, useRef, useEffect } from "react";
 import JSZip from "jszip";
 import html2canvas from "html2canvas";
-import NotesLoader from "./NotesLoader";
 import { Loader } from "@/components/Loader";
 
 // Hook personalizado para detectar el tamaño de la ventana
@@ -112,13 +111,15 @@ export function Content() {
   };
 
   return (
-    <div className="flex-1 flex flex-col md:flex-row min-w-full gap-10 tracking-wide min-h-0">
+    // CAMBIO: Eliminado 'min-h-0' para permitir crecimiento vertical
+    <div className="flex-1 flex flex-col md:flex-row min-w-full gap-10 tracking-wide">
       <div className="flex flex-col max-w-2xl flex-shrink-0">
         <UploadFileBox />
         <SettingsBox />
       </div>
 
-      <div className="min-h-0 flex-1 bg-white px-6 py-7 shadow rounded-lg flex flex-col ">
+      {/* CAMBIO: Eliminado 'min-h-0' para que la caja blanca crezca según el contenido */}
+      <div className="flex-1 bg-white px-6 py-7 shadow rounded-lg flex flex-col">
         <div className="flex justify-between">
           <p className="text-slate-800 font-semibold text-xl mb-4">
             Notas generadas
@@ -135,7 +136,7 @@ export function Content() {
 
         {!loading ? (
           notes.length === 0 ? (
-            <div className="flex flex-1 flex-col items-center justify-center">
+            <div className="flex flex-1 flex-col items-center justify-center min-h-[400px]">
               <FileUp className="w-20 h-20 stroke-1 text-icons" />
               <p className="text-xl text-[#808290]">
                 Tus notas aparecerán aquí
@@ -147,7 +148,7 @@ export function Content() {
             </div>
           ) : (
             <div className="flex flex-col flex-1">
-              <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4 flex-1">
+              <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4 flex-1 pb-4">
                 {currentNotes.map((note, index) => (
                   <PostIt
                     ref={(el) => {
@@ -204,7 +205,9 @@ export function Content() {
             </div>
           )
         ) : (
-          <Loader text="Generando notas" />
+          <div className="flex-1 flex items-center justify-center min-h-[400px]">
+             <Loader text="Generando notas" />
+          </div>
         )}
       </div>
     </div>

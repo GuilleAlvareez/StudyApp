@@ -43,9 +43,9 @@ export const Navbar = () => {
             
             {/* --- LOGO --- */}
             <Link href="/" className="flex items-center gap-2 group relative z-50">
-              <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300">
+              {/* <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300">
                 <Sparkles size={20} className="text-white" />
-              </div>
+              </div> */}
               <span className="text-xl font-bold text-slate-800 tracking-tight group-hover:text-indigo-600 transition-colors">
                 StudyApp
               </span>

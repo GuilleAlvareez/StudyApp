@@ -10,11 +10,7 @@ import {
 import { useFileContext } from "@/context/fileContext";
 import { useEffect, useState } from "react";
 import { useSummarizer } from "../hooks/useSummarizer";
-
-// Importa los componentes y estilos de la nueva librería
 import { DocumentLoadEvent, Viewer, Worker } from "@react-pdf-viewer/core";
-
-// Importa los estilos CSS
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { Loader } from "../../../components/Loader";
@@ -25,7 +21,7 @@ export function ResultViewer() {
   const { summarize, loading } = useSummarizer();
   const [numPages, setNumPages] = useState<number | null>(null);
   const [fileData, setFileData] = useState<Uint8Array | null>(null);
-  // Usar el archivo resumido si está disponible, sino el original
+  
   const displayFile = summaryFile || file;
 
   useEffect(() => {
@@ -33,7 +29,6 @@ export function ResultViewer() {
       const reader = new FileReader();
       reader.onload = (e) => {
         if (e.target?.result) {
-          // Convertimos el ArrayBuffer a Uint8Array
           setFileData(new Uint8Array(e.target.result as ArrayBuffer));
         }
       };
@@ -42,21 +37,6 @@ export function ResultViewer() {
       setFileData(null);
     }
   }, [displayFile]);
-
-  // const fileUrl = useMemo(() => {
-  //     if (displayFile) {
-  //         return URL.createObjectURL(displayFile);
-  //     }
-  //     return null;
-  // }, [displayFile]);
-
-  // useEffect(() => {
-  //     return () => {
-  //         if (fileUrl) {
-  //             URL.revokeObjectURL(fileUrl);
-  //         }
-  //     };
-  // }, [fileUrl]);
 
   function onDocumentLoadSuccess(e: DocumentLoadEvent): void {
     setNumPages(e.doc.numPages);
@@ -77,41 +57,32 @@ export function ResultViewer() {
 
   function formatFileSize(file?: File | Blob | null): string {
     if (!file) return "0 B";
-
     const bytes = file.size;
     const sizes = ["B", "KB", "MB", "GB", "TB"];
-
     if (bytes === 0) return "0 B";
-
     const i = Math.floor(Math.log(bytes) / Math.log(1024));
     const size = bytes / Math.pow(1024, i);
-
     return `${size.toFixed(2)} ${sizes[i]}`;
   }
 
   return (
-    <div className="flex flex-col items-center text-start space-y-6 h-full w-full lg:py-6 lg:px-10 tracking-wide lg:overflow-y-hidden">
-      {/* <div className="flex flex-col w-full mb-15 lg:mb-15">
-        <div className="flex">
-          <button onClick={toggleSideBar}>
-            <Menu className="w-6 h-6 stroke-1 mr-4" />
-          </button>
-          <h1 className="text-4xl font-bold text-slate-800 mb-2">
-            Crea tu Resumen
-          </h1>
-        </div>
-        <p className="text-slate-500">
-          Transforma tus documentos en resúmenes claros y concisos en segundos.
-        </p>
-      </div> */}
+    // Quitamos lg:overflow-y-hidden del contenedor principal para evitar cortes si la pantalla es muy pequeña en altura
+    <div className="flex flex-1 flex-col items-center text-start space-y-6 w-full lg:py-6 lg:px-10 tracking-wide lg:overflow-y-hidden">
+      
       <Header
         title="Crea tu Resumen"
         description="Transforma tus documentos en resúmenes claros y concisos en segundos."
       />
 
-      <section className="h-full w-full flex flex-col lg:pr-60 lg:px-50 lg:flex-row">
+      <section className="flex-1 w-full flex flex-col lg:pr-60 lg:px-50 lg:flex-row items-start">
         {/* Visor de PDF */}
-        <div className="rounded-xl h-full w-full lg:h-6/7 lg:w-4/7 lg:mr-10 bg-white border border-slate-200 shadow-md overflow-hidden flex flex-col">
+        {/* 
+            CAMBIO AQUÍ:
+            1. h-[500px]: Altura fija para móviles.
+            2. lg:h-[calc(100vh-200px)]: En escritorio, calcula la altura exacta para que quepa en pantalla restando el header y padding.
+            3. lg:sticky lg:top-10: Opcional, ayuda a que se mantenga visible si haces scroll en el lado derecho.
+        */}
+        <div className="rounded-xl h-[500px] lg:h-[70vh] w-full lg:w-5/6 lg:mr-10 bg-white border border-slate-200 shadow-md overflow-hidden flex flex-col">
           <div className="flex-1 overflow-y-auto relative">
             {displayFile && fileData ? (
               <>
@@ -129,7 +100,6 @@ export function ResultViewer() {
                   </div>
                 </Worker>
 
-                {/* Loader superpuesto mientras se resume */}
                 {loading && (
                   <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center z-10">
                     <Loader text="Generando resumen" />
@@ -142,8 +112,9 @@ export function ResultViewer() {
           </div>
         </div>
 
-        {/* Botón de Descarga */}
-        <section className="flex flex-col gap-3  py-10 lg:py-40 px-4">
+        {/* Botón de Descarga y Panel Derecho */}
+        {/* Ajustamos el padding vertical para que se alinee mejor */}
+        <section className="flex flex-col gap-3 py-10 lg:py-40 px-4 w-full lg:w-3/7">
           <p className="text-3xl font-semibold">¡Listo para empezar!</p>
           <p className="text-lg text-slate-800">
             Su archivo ha sido cargado. ¿Qué te gustaría hacer ahora?

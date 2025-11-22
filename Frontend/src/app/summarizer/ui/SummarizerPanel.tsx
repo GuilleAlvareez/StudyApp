@@ -18,27 +18,10 @@ export function SummarizerPanel() {
     removeFile,
     inputRef,
   } = useFileContext();
-  // const { toggleSideBar } = useSideBar();
-
-  // const { summarize } = useSummarizer();
 
   return (
-    <div className="flex flex-col items-center text-start space-y-6 h-full w-full lg:py-6 lg:px-10 tracking-wide">
-      {/* <div className="flex flex-col w-full mb-15 lg:mb-15">
-        <div className="flex">
-          {!isOpen && (
-            <button onClick={toggleSideBar} className="xl:hidden">
-              <Menu className="w-6 h-6 stroke-1 mr-4" />
-            </button>
-          )}
-          <h1 className="text-4xl font-bold text-slate-800 mb-2">
-            Crea tu Resumen
-          </h1>
-        </div>
-        <p className="text-slate-500">
-          Transforma tus documentos en resúmenes claros y concisos en segundos.
-        </p>
-      </div> */}
+    <div className="flex flex-1 flex-col items-center text-start space-y-6 w-full lg:pt-6 lg:px-10 tracking-wide lg:overflow-y-hidden">
+      
       <Header title="Crea tu Resumen" description="Transforma tus documentos en resúmenes claros y concisos en segundos." />
 
       <input
@@ -50,23 +33,25 @@ export function SummarizerPanel() {
         size={MAX_FILE_SIZE}
       />
 
-      {/* Área de Carga de Archivos */}
-      <div className="space-y-3 w-5/6 h-3/5 mt-20">
+      {/* 
+         SOLUCIÓN AQUÍ:
+         1. w-5/6: Ancho al 83%.
+         2. h-[50vh] lg:h-[60vh]: Altura fija basada en la ventana (viewport height). 
+            Esto recupera el tamaño grande original sin depender del padre.
+         3. min-h-[400px]: Evita que se colapse si la pantalla es muy bajita.
+      */}
+      <div className="w-5/6 h-[50vh] lg:h-[60vh] min-h-[400px] mt-10 lg:mt-10 mb-10">
         <div
           onClick={pressInput}
           onDragEnter={onDragEnter}
           onDragOver={onDragOver}
           onDragLeave={onDragLeave}
           onDrop={handleDrop}
-          className={`h-full relative bg-slate-50 border-2 border-dashed rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:border-indigo-400 hover:bg-slate-100 transition-all duration-300 shadow-inner ${
+          className={`h-full w-full relative bg-slate-50 border-2 border-dashed rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:border-indigo-400 hover:bg-slate-100 transition-all duration-300 shadow-inner ${
             isDragging ? "border-indigo-400 bg-slate-100" : "border-slate-300"
           }`}
         >
-          {/* <div className="flex items-center justify-center bg-white w-30 h-30 p-4 rounded-full shadow-md mb-6">
-            <UploadCloud className="w-full h-full text-blue-600" />
-          </div> */}
-
-          <BaselineCloudUpload className="w-20 h-20 stroke-1 text-icons" />
+          <BaselineCloudUpload className="w-20 h-20 stroke-1 text-icons mb-6" />
 
           <p className="text-textGray font-bold text-2xl mb-2">
             Arrastra y suelta tu documento aquí
@@ -75,7 +60,7 @@ export function SummarizerPanel() {
             o haz clic para seleccionarlo
           </p>
 
-          <p className="absolute bottom-10 lg:bottom-1/6 text-xs p-2 text-textGray text-center">
+          <p className="absolute bottom-6 text-xs p-2 text-textGray text-center">
             Soporta archivos PDF de hasta 15MB
           </p>
         </div>
@@ -83,12 +68,12 @@ export function SummarizerPanel() {
 
       {/* Archivo Cargado */}
       {error !== "" && (
-        <p className="w-full border border-red-300 bg-red-100 rounded-lg p-3 text-red-500 text-sm">
+        <p className="w-5/6 border border-red-300 bg-red-100 rounded-lg p-3 text-red-500 text-sm">
           {error}
         </p>
       )}
       {file && (
-        <div className="bg-white border border-slate-200 rounded-lg p-3 flex items-center justify-between shadow-sm">
+        <div className="bg-white border border-slate-200 rounded-lg p-3 flex items-center justify-between shadow-sm w-5/6">
           <div className="flex items-center space-x-3">
             <FileText className="w-5 h-5 text-blue-600" />
             <span className="text-sm font-medium text-slate-800">
