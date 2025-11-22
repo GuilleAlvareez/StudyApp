@@ -90,7 +90,7 @@ export function ResultViewer() {
   }
 
   return (
-    <div className="flex flex-col items-center text-start space-y-6 h-full w-full lg:py-6 lg:px-10 tracking-wide">
+    <div className="flex flex-col items-center text-start space-y-6 h-full w-full lg:py-6 lg:px-10 tracking-wide lg:overflow-y-hidden">
       {/* <div className="flex flex-col w-full mb-15 lg:mb-15">
         <div className="flex">
           <button onClick={toggleSideBar}>
