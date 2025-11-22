@@ -21,7 +21,7 @@ export default function QuickNotesPage() {
 
   return (
     <QuickNotesProvider>
-      <div className="h-screen w-full p-8 pt-24 bg-[#f8f9fa] overflow-x-hidden">
+      <div className="h-screen w-full p-8 pt-24 bg-[#f8f9fa] overflow-hidden">
         <div className="flex flex-col h-full w-full items-center text-start lg:py-6 lg:px-10 tracking-wide">
           <Header title="Genera Notas Rápidas de tus Documentos" description="Sube tu archivo y genera notas rápidas en base al contenido." />
           <Content />

@@ -112,15 +112,15 @@ export function Content() {
   };
 
   return (
-    <div className="flex-1 flex flex-col md:flex-row min-w-full gap-10 tracking-wide">
+    <div className="flex-1 flex flex-col md:flex-row min-w-full gap-10 tracking-wide min-h-0">
       <div className="flex flex-col max-w-2xl flex-shrink-0">
         <UploadFileBox />
         <SettingsBox />
       </div>
 
-      <div className="min-h-auto flex-1 bg-white px-6 py-7 shadow rounded-lg flex flex-col">
+      <div className="min-h-0 flex-1 bg-white px-6 py-7 shadow rounded-lg flex flex-col ">
         <div className="flex justify-between">
-          <p className="text-slate-800 font-semibold text-xl mb-6">
+          <p className="text-slate-800 font-semibold text-xl mb-4">
             Notas generadas
           </p>
           {notes.length > 0 && (
@@ -147,7 +147,7 @@ export function Content() {
             </div>
           ) : (
             <div className="flex flex-col flex-1">
-              <div className="grid grid-cols-1 2xl:grid-cols-2 gap-6 flex-1">
+              <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4 flex-1">
                 {currentNotes.map((note, index) => (
                   <PostIt
                     ref={(el) => {
@@ -163,7 +163,7 @@ export function Content() {
               </div>
 
               {totalPages > 1 && (
-                <div className="flex items-center justify-center gap-4 mt-8 pt-4 border-t border-gray-200">
+                <div className="flex items-center justify-center gap-4 mt-4 pt-4 border-t border-gray-200">
                   <button
                     onClick={goToPrevious}
                     disabled={currentPage === 1}
