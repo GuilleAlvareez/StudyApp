@@ -35,8 +35,8 @@ export function Content() {
   const [currentPage, setCurrentPage] = useState(1);
   const { width } = useWindowSize();
 
-  const isXLScreen = width >= 1280;
-  const notesPerPage = isXLScreen ? 4 : 2;
+  const is2XLScreen = width >= 1536;
+  const notesPerPage = is2XLScreen ? 4 : 2;
 
   const postitRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [isDownloading, setIsDownloading] = useState(false);
@@ -49,7 +49,7 @@ export function Content() {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [isXLScreen]);
+  }, [is2XLScreen]);
 
   const goToPage = (page: number) => {
     setCurrentPage(page);
