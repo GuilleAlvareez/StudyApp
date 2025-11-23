@@ -32,10 +32,10 @@ export const Navbar = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
           isScrolled || isMobileMenuOpen
-            ? 'bg-white/80 backdrop-blur-md border-b border-slate-200/60 shadow-sm py-3'
-            : 'bg-transparent py-5'
+            ? 'bg-white/80 backdrop-blur-md border-slate-200/60 shadow-sm py-3'
+            : 'bg-transparent border-transparent py-5'
         }`}
       >
         <div className="container mx-auto px-4 md:px-6">
@@ -43,9 +43,9 @@ export const Navbar = () => {
             
             {/* --- LOGO --- */}
             <Link href="/" className="flex items-center gap-2 group relative z-50">
-              {/* <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300">
+              <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300">
                 <Sparkles size={20} className="text-white" />
-              </div> */}
+              </div>
               <span className="text-xl font-bold text-slate-800 tracking-tight group-hover:text-indigo-600 transition-colors">
                 StudyApp
               </span>
