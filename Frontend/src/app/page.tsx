@@ -137,7 +137,7 @@ const HeroSection = () => {
           </div>
 
           {/* Stats */}
-          <div className="flex gap-8 pt-8 border-t border-slate-200 w-full">
+          <div className="flex gap-8 pt-8 border-t border-slate-200 w-full justify-center lg:justify-start">
             <div>
               <div className="text-3xl font-bold text-slate-800">10K+</div>
               <div className="text-sm text-slate-600">Documentos procesados</div>
