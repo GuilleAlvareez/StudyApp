@@ -32,7 +32,7 @@ export default function AvisoLegal() {
               <section>
                 <h2 className="text-2xl font-bold text-slate-900 mb-4">2. Objeto</h2>
                 <p>
-                  El presente aviso legal regula el uso del sitio web StudyApp (en adelante, "el sitio web"), del que es 
+                  El presente aviso legal regula el uso del sitio web StudyApp (en adelante, &quot;el sitio web&quot;), del que es 
                   titular StudyApp. La navegación por el sitio web atribuye la condición de usuario del mismo e implica la 
                   aceptación plena y sin reservas de todas y cada una de las disposiciones incluidas en este Aviso Legal.
                 </p>
