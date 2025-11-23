@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 
 export default function PoliticaPrivacidad() {
   return (
@@ -98,7 +99,7 @@ export default function PoliticaPrivacidad() {
                 <p>
                   Utilizamos cookies y tecnologías similares para mejorar tu experiencia. Puedes gestionar tus preferencias 
                   de cookies a través del banner de cookies que aparece en tu primera visita. Para más información, 
-                  consulta nuestra <a href="/politica-cookies" className="text-indigo-600 hover:text-indigo-800 underline">Política de Cookies</a>.
+                  consulta nuestra <Link href="/politica-cookies" className="text-indigo-600 hover:text-indigo-800 underline">Política de Cookies</Link>.
                 </p>
               </section>
 
@@ -131,12 +132,12 @@ export default function PoliticaPrivacidad() {
             </div>
 
             <div className="mt-12 pt-8 border-t border-slate-200">
-              <a 
+              <Link 
                 href="/" 
                 className="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold transition-colors"
               >
                 ← Volver al inicio
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 
 export default function AvisoLegal() {
   return (
@@ -109,9 +110,9 @@ export default function AvisoLegal() {
                 <h2 className="text-2xl font-bold text-slate-900 mb-4">7. Protección de Datos</h2>
                 <p>
                   Para más información sobre cómo tratamos tus datos personales, consulta nuestra{' '}
-                  <a href="/politica-privacidad" className="text-indigo-600 hover:text-indigo-800 underline">
+                  <Link href="/politica-privacidad" className="text-indigo-600 hover:text-indigo-800 underline">
                     Política de Privacidad
-                  </a>.
+                  </Link>.
                 </p>
               </section>
 
@@ -146,12 +147,12 @@ export default function AvisoLegal() {
             </div>
 
             <div className="mt-12 pt-8 border-t border-slate-200">
-              <a 
+              <Link 
                 href="/" 
                 className="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold transition-colors"
               >
                 ← Volver al inicio
-              </a>
+              </Link>
             </div>
           </div>
         </div>

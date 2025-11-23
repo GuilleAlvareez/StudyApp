@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 
 export default function PoliticaCookies() {
   return (
@@ -119,14 +120,14 @@ export default function PoliticaCookies() {
                   </p>
                   <p className="text-sm">
                     <strong>Más información:</strong>{' '}
-                    <a 
+                    <Link 
                       href="https://policies.google.com/privacy" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="text-indigo-600 hover:text-indigo-800 underline"
                     >
                       Política de Privacidad de Google
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </section>
@@ -152,24 +153,24 @@ export default function PoliticaCookies() {
                 </p>
                 <ul className="list-disc list-inside space-y-2 ml-4">
                   <li>
-                    <a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-800 underline">
+                    <Link href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-800 underline">
                       Google Chrome
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="https://support.mozilla.org/es/kb/cookies-informacion-que-los-sitios-web-guardan-en-" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-800 underline">
+                    <Link href="https://support.mozilla.org/es/kb/cookies-informacion-que-los-sitios-web-guardan-en-" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-800 underline">
                       Mozilla Firefox
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-800 underline">
+                    <Link href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-800 underline">
                       Safari
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="https://support.microsoft.com/es-es/microsoft-edge/eliminar-las-cookies-en-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-800 underline">
+                    <Link href="https://support.microsoft.com/es-es/microsoft-edge/eliminar-las-cookies-en-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-800 underline">
                       Microsoft Edge
-                    </a>
+                    </Link>
                   </li>
                 </ul>
 
@@ -219,12 +220,12 @@ export default function PoliticaCookies() {
             </div>
 
             <div className="mt-12 pt-8 border-t border-slate-200">
-              <a 
+              <Link 
                 href="/" 
                 className="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold transition-colors"
               >
                 ← Volver al inicio
-              </a>
+              </Link>
             </div>
           </div>
         </div>
