@@ -19,6 +19,8 @@ export async function POST(req: NextRequest) {
     rating,
   });
 
+  console.log("hola desde la api");
+
   if (dbError) {
     return NextResponse.json(
       { error: dbError.message, details: dbError },
