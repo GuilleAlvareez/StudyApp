@@ -24,6 +24,7 @@ export const Navbar = () => {
     { href: '/', label: 'Inicio' },
     { href: '/summarizer', label: 'Resumidor' },
     { href: '/quicknotes', label: 'Notas Rápidas' },
+    { href: '/reviews', label: 'Reseñas' },
   ];
 
   return (

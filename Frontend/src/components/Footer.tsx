@@ -64,7 +64,7 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#testimonials" className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 flex items-center gap-2 group">
+                <a href="/reviews" className="text-slate-400 hover:text-indigo-400 transition-colors duration-300 flex items-center gap-2 group">
                   <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   Reseñas
                 </a>
