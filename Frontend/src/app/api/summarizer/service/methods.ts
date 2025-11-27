@@ -21,9 +21,11 @@ export async function convertToMarkdown(formData: FormData) {
   return markdownText;
 }
 
-export async function convertMarkdownToPdf(markdownText: string): Promise<Buffer | null> {
+export async function convertMarkdownToPdf(
+  markdownText: string
+): Promise<Buffer | null> {
   try {
-    if (!markdownText || typeof markdownText !== 'string') {
+    if (!markdownText || typeof markdownText !== "string") {
       console.error("Texto Markdown inválido:", markdownText);
       return null;
     }
@@ -36,79 +38,83 @@ export async function convertMarkdownToPdf(markdownText: string): Promise<Buffer
     });
 
     // Dividir el contenido en líneas y procesar Markdown
-    const lines = markdownText.split('\n');
+    const lines = markdownText.split("\n");
     let yPosition = 20;
-    
+
+    // Set default font to Helvetica
+    doc.setFont("helvetica", "normal");
+
     for (const line of lines) {
-      if (yPosition > 280) { // Nueva página si se acaba el espacio
+      if (yPosition > 280) {
+        // Nueva página si se acaba el espacio
         doc.addPage();
         yPosition = 20;
       }
-      
+
       // Procesar diferentes elementos de Markdown
-      if (line.startsWith('# ')) {
+      if (line.startsWith("# ")) {
         // H1 - Título principal
         doc.setFontSize(18);
-        doc.setFont("", 'bold');
+        doc.setFont("helvetica", "bold");
         doc.text(line.substring(2).trim(), 15, yPosition);
         yPosition += 12;
-      } else if (line.startsWith('## ')) {
+      } else if (line.startsWith("## ")) {
         // H2 - Subtítulo
         doc.setFontSize(16);
-        doc.setFont("", 'bold');
+        doc.setFont("helvetica", "bold");
         doc.text(line.substring(3).trim(), 15, yPosition);
         yPosition += 10;
-      } else if (line.startsWith('### ')) {
+      } else if (line.startsWith("### ")) {
         // H3 - Subtítulo menor
         doc.setFontSize(14);
-        doc.setFont("", 'bold');
+        doc.setFont("helvetica", "bold");
         doc.text(line.substring(4).trim(), 15, yPosition);
         yPosition += 8;
-      } else if (line.startsWith('#### ')) {
+      } else if (line.startsWith("#### ")) {
         // H4 - Subtítulo menor
         doc.setFontSize(12);
-        doc.setFont("", 'bold');
+        doc.setFont("helvetica", "bold");
         doc.text(line.substring(5).trim(), 15, yPosition);
         yPosition += 7;
-      } else if (line.startsWith('- ') || line.startsWith('* ')) {
+      } else if (line.startsWith("- ") || line.startsWith("* ")) {
         // Lista con viñetas
         doc.setFontSize(11);
-        doc.setFont("", 'normal');
-        const bulletText = '• ' + line.substring(2).trim();
+        doc.setFont("helvetica", "normal");
+        const bulletText = "• " + line.substring(2).trim();
         const splitText = doc.splitTextToSize(bulletText, 160);
         doc.text(splitText, 20, yPosition);
         yPosition += splitText.length * 5;
       } else if (/^\d+\.\s/.test(line)) {
         // Lista numerada
         doc.setFontSize(11);
-        doc.setFont("", 'normal');
+        doc.setFont("helvetica", "normal");
         const splitText = doc.splitTextToSize(line.trim(), 160);
         doc.text(splitText, 20, yPosition);
         yPosition += splitText.length * 5;
-      } else if (line.startsWith('**') && line.endsWith('**')) {
+      } else if (line.startsWith("**") && line.endsWith("**")) {
         // Texto en negrita
         doc.setFontSize(11);
-        doc.setFont("", 'bold');
+        doc.setFont("helvetica", "bold");
         const boldText = line.substring(2, line.length - 2);
         const splitText = doc.splitTextToSize(boldText, 170);
         doc.text(splitText, 15, yPosition);
         yPosition += splitText.length * 5;
-      } else if (line.startsWith('> ')) {
+      } else if (line.startsWith("> ")) {
         // Cita
         doc.setFontSize(10);
-        doc.setFont("", 'italic');
+        doc.setFont("helvetica", "italic");
         const quoteText = line.substring(2).trim();
         const splitText = doc.splitTextToSize(quoteText, 160);
         doc.text(splitText, 25, yPosition);
         yPosition += splitText.length * 4.5;
-      } else if (line.trim() !== '') {
+      } else if (line.trim() !== "") {
         // Texto normal
         doc.setFontSize(11);
-        doc.setFont("", 'normal');
-        
+        doc.setFont("helvetica", "normal");
+
         // Procesar texto con formato inline (negrita, cursiva)
         const processedLine = line.trim();
-        
+
         // Dividir líneas largas
         const splitText = doc.splitTextToSize(processedLine, 170);
         doc.text(splitText, 15, yPosition);

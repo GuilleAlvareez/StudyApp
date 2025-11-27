@@ -21,7 +21,7 @@ export function ResultViewer() {
   const { summarize, loading } = useSummarizer();
   const [numPages, setNumPages] = useState<number | null>(null);
   const [fileData, setFileData] = useState<Uint8Array | null>(null);
-  
+
   const displayFile = summaryFile || file;
 
   useEffect(() => {
@@ -68,7 +68,6 @@ export function ResultViewer() {
   return (
     // Quitamos lg:overflow-y-hidden del contenedor principal para evitar cortes si la pantalla es muy pequeña en altura
     <div className="flex flex-1 flex-col items-center text-start space-y-6 w-full lg:py-6 lg:px-10 tracking-wide lg:overflow-y-hidden">
-      
       <Header
         title="Crea tu Resumen"
         description="Transforma tus documentos en resúmenes claros y concisos en segundos."
@@ -76,12 +75,6 @@ export function ResultViewer() {
 
       <section className="flex-1 w-full flex flex-col lg:pr-60 lg:px-50 lg:flex-row items-start">
         {/* Visor de PDF */}
-        {/* 
-            CAMBIO AQUÍ:
-            1. h-[500px]: Altura fija para móviles.
-            2. lg:h-[calc(100vh-200px)]: En escritorio, calcula la altura exacta para que quepa en pantalla restando el header y padding.
-            3. lg:sticky lg:top-10: Opcional, ayuda a que se mantenga visible si haces scroll en el lado derecho.
-        */}
         <div className="rounded-xl h-[500px] lg:h-[70vh] w-full lg:w-5/6 lg:mr-10 bg-white border border-slate-200 shadow-md overflow-hidden flex flex-col">
           <div className="flex-1 overflow-y-auto relative">
             {displayFile && fileData ? (
