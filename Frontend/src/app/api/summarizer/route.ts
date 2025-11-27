@@ -12,8 +12,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    console.log("Markdown extraído, longitud:", markdownText);
-    
     const response = await fetch(
       "https://openrouter.ai/api/v1/chat/completions",
       {
@@ -50,7 +48,6 @@ export async function POST(req: NextRequest) {
     }
 
     const data = await response.json();
-    console.log("Resumen recibido:", data);
 
     const summary = data.choices?.[0]?.message?.content;
     if (!summary) {
