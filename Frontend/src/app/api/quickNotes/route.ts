@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { convertToMarkdown } from "../../quicknotes/utils/methods";
+import { callOpenRouterWithFallback } from "../summarizer/service/methods";
 
 export async function POST(req: NextRequest) {
   try {
@@ -18,50 +19,48 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-    console.log("LLega antes de la api");
-    console.log("Usando modelo:", process.env.LLM_MODEL);
+    const systemPrompt =
+      process.env.SYSTEM_PROMPT_QUICKNOTES || "Eres un experto tomando notas.";
+    const userPrompt = `Genera ${numNotes} notas a partir del siguiente texto: ${markdownText}`;
 
-    const response = await fetch(
-      "https://openrouter.ai/api/v1/chat/completions",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-          "Content-Type": "application/json",
-          "HTTP-Referer": process.env.YOUR_SITE_URL || "",
-          "X-Title": process.env.YOUR_SITE_NAME || "StudyApp",
-        },
-        body: JSON.stringify({
-          model: process.env.LLM_MODEL,
-          messages: [
-            {
-              role: "system",
-              content: process.env.SYSTEM_PROMPT_QUICKNOTES,
-            },
-            {
-              role: "user",
-              content: `Genera ${numNotes} notas a partir del siguiente texto: ${markdownText}`,
-            },
-          ],
-        }),
+    console.log("Primary Model:", process.env.LLM_MODEL);
+    console.log("Fallback Model:", process.env.FALLBACK_LLM_MODEL);
+
+    let notesContent: string | undefined;
+
+    try {
+      notesContent = await callOpenRouterWithFallback(
+        process.env.LLM_MODEL || "",
+        systemPrompt,
+        userPrompt
+      );
+    } catch (error) {
+      console.error("Primary model failed. Error details:", error);
+      console.warn("Attempting fallback...");
+      try {
+        notesContent = await callOpenRouterWithFallback(
+          process.env.FALLBACK_LLM_MODEL || "",
+          systemPrompt,
+          userPrompt
+        );
+      } catch (fallbackError) {
+        console.error(
+          "Fallback model also failed. Error details:",
+          fallbackError
+        );
       }
-    );
+    }
 
-    console.log("Sale de la api");
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Error desde OpenRouter:", errorText);
+    if (!notesContent) {
       return NextResponse.json(
         { error: "El servicio de notas falló." },
-        { status: response.status }
+        { status: 500 }
       );
     }
 
-    const data = await response.json();
-    console.log("Notas recibidas:", data);
+    console.log("Notas recibidas:", notesContent);
 
-    return NextResponse.json(data.choices?.[0]?.message?.content);
+    return NextResponse.json(notesContent);
   } catch (error) {
     console.error("Error en el handler de la API:", error);
     return NextResponse.json(
