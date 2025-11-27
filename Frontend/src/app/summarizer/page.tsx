@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { SummarizerPanel } from "./ui/SummarizerPanel";
 import { ResultViewer } from "./ui/ResultViewer";
 import { useFileContext } from "@/context/fileContext";
@@ -16,7 +16,7 @@ export default function SummarizerPage() {
   return (
     // Usamos min-h-screen para el fondo.
     // flex-col y flex-1 aseguran que los hijos ocupen el espacio.
-    <div className="min-h-screen lg:h-screen w-full flex flex-col p-8 pt-24 bg-[#f8f9fa] lg:overflow-y-hidden">
+    <div className="min-h-screen lg:h-screen w-full flex flex-col p-8 pt-24 bg-[#f8f9fa] dark:bg-slate-950 lg:overflow-y-hidden">
       <div className="flex-1 flex flex-col gap-8 w-full  mx-auto">
         {file ? (
           <div className="flex-1 flex flex-col">

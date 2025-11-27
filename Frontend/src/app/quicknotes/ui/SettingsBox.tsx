@@ -57,11 +57,13 @@ export function SettingsBox() {
   };
 
   return (
-    <div className="w-full flex flex-col bg-white px-6 py-7 rounded-lg shadow">
-      <p className="text-slate-800 font-semibold text-xl">Ajustes</p>
+    <div className="w-full flex flex-col bg-white dark:bg-slate-900 px-6 py-7 rounded-lg shadow">
+      <p className="text-slate-800 dark:text-slate-200 font-semibold text-xl">
+        Ajustes
+      </p>
 
       <div className="flex flex-col mt-4">
-        <p className="text-textGray">Numero de notas</p>
+        <p className="text-textGray dark:text-slate-400">Numero de notas</p>
 
         <input
           ref={inputRef}
@@ -70,8 +72,8 @@ export function SettingsBox() {
           placeholder="1 - 16"
           className={`h-10 rounded-lg border px-3 mt-1 focus:outline-none ${
             error
-              ? "border-red-300 bg-red-100 mb-1"
-              : "border-slate-300 bg-slate-100 mb-4"
+              ? "border-red-300 bg-red-100 dark:bg-red-900/10 mb-1"
+              : "border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 mb-4"
           }`}
         />
 

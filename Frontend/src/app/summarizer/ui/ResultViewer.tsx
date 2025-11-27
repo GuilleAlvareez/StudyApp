@@ -67,7 +67,7 @@ export function ResultViewer() {
 
   return (
     // Quitamos lg:overflow-y-hidden del contenedor principal para evitar cortes si la pantalla es muy pequeña en altura
-    <div className="flex flex-1 flex-col items-center text-start space-y-6 w-full lg:py-6 lg:px-10 tracking-wide lg:overflow-y-hidden">
+    <div className="flex flex-1 flex-col items-center text-start space-y-6 w-full lg:py-6 lg:px-10 tracking-wide lg:overflow-y-hidden dark:text-slate-200">
       <Header
         title="Crea tu Resumen"
         description="Transforma tus documentos en resúmenes claros y concisos en segundos."
@@ -75,11 +75,11 @@ export function ResultViewer() {
 
       <section className="flex-1 w-full flex flex-col lg:pr-60 lg:px-50 lg:flex-row items-start">
         {/* Visor de PDF */}
-        <div className="rounded-xl h-[500px] lg:h-[70vh] w-full lg:w-5/6 lg:mr-10 bg-white border border-slate-200 shadow-md overflow-hidden flex flex-col">
+        <div className="rounded-xl h-[500px] lg:h-[70vh] w-full lg:w-5/6 lg:mr-10 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md overflow-hidden flex flex-col">
           <div className="flex-1 overflow-y-auto relative">
             {displayFile && fileData ? (
               <>
-                <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+                <Worker workerUrl="/pdf.worker.min.js">
                   <div style={{ height: "100%", width: "100%" }}>
                     <Viewer
                       fileUrl={fileData}
@@ -94,7 +94,7 @@ export function ResultViewer() {
                 </Worker>
 
                 {loading && (
-                  <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center z-10">
+                  <div className="absolute inset-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm flex flex-col items-center justify-center z-10">
                     <Loader text="Generando resumen" />
                   </div>
                 )}
@@ -109,26 +109,26 @@ export function ResultViewer() {
         {/* Ajustamos el padding vertical para que se alinee mejor */}
         <section className="flex flex-col gap-3 py-10 lg:py-40 px-4 w-full lg:w-3/7">
           <p className="text-3xl font-semibold">¡Listo para empezar!</p>
-          <p className="text-lg text-slate-800">
+          <p className="text-lg text-slate-800 dark:text-slate-300">
             Su archivo ha sido cargado. ¿Qué te gustaría hacer ahora?
           </p>
 
-          <div className="bg-white border border-slate-200 rounded-lg mt-5 mb-2 p-3 flex items-center justify-between shadow-sm">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg mt-5 mb-2 p-3 flex items-center justify-between shadow-sm">
             <div className="flex items-center space-x-3">
-              <FileText className="w-5 h-5 text-red-700" />
+              <FileText className="w-5 h-5 text-red-700 dark:text-red-500" />
 
               <div className="flex flex-col">
                 <span className="text-sm font-semibold">{file?.name}</span>
-                <span className="text-sm font-medium text-slate-800">
+                <span className="text-sm font-medium text-slate-800 dark:text-slate-200">
                   {formatFileSize(file)}
                 </span>
               </div>
             </div>
             <button
               onClick={removeFile}
-              className="p-1.5 hover:bg-slate-100 rounded-full transition-colors"
+              className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
             >
-              <X className="w-4 h-4 text-slate-500" />
+              <X className="w-4 h-4 text-slate-500 dark:text-slate-400" />
             </button>
           </div>
 
@@ -146,7 +146,7 @@ export function ResultViewer() {
 
                 <button
                   onClick={removeFile}
-                  className="w-full flex items-center justify-center text-slate-700 font-semibold py-3 px-6 rounded-lg bg-white hover:bg-slate-50 duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-0.5 disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed disabled:transform-none"
+                  className="w-full flex items-center justify-center text-slate-700 dark:text-slate-200 font-semibold py-3 px-6 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-0.5 disabled:bg-slate-100 dark:disabled:bg-slate-900 disabled:text-slate-400 disabled:cursor-not-allowed disabled:transform-none"
                   disabled={!file}
                 >
                   <FileSearch2 className="w-5 h-5 stroke-2 mr-2" />

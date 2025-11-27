@@ -1,4 +1,4 @@
-import './Loader.css';
+import "./Loader.css";
 
 export function Loader({ text }: { text: string }) {
   return (
@@ -10,13 +10,11 @@ export function Loader({ text }: { text: string }) {
       </div>
 
       {/* Texto */}
-      <p className="text-slate-700 font-medium text-base">
+      <p className="text-slate-700 dark:text-white font-medium text-base">
         Procesando documento
       </p>
 
-      <p className="text-slate-500 text-sm mt-1">
-        {text}
-      </p>
+      <p className="text-slate-500 dark:text-white text-sm mt-1">{text}</p>
     </div>
   );
 }

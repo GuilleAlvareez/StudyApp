@@ -42,8 +42,10 @@ export function UploadFileBox() {
   }
 
   return (
-    <div className="w-96 flex flex-col bg-white px-6 py-7 rounded-lg shadow mb-6">
-      <p className="text-slate-800 font-semibold text-xl">Subir archivo</p>
+    <div className="w-96 flex flex-col bg-white dark:bg-slate-900 px-6 py-7 rounded-lg shadow mb-6">
+      <p className="text-slate-800 dark:text-slate-200 font-semibold text-xl">
+        Subir archivo
+      </p>
 
       {!file ? (
         <>
@@ -64,14 +66,14 @@ export function UploadFileBox() {
               onDragOver={onDragOver}
               onDragLeave={onDragLeave}
               onDrop={handleDrop}
-              className={`relative bg-slate-50 border-2 border-dashed rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:border-indigo-400 hover:bg-slate-100 transition-all duration-300 shadow-inner border-slate-300`}
+              className={`relative bg-slate-50 dark:bg-slate-800 border-2 border-dashed rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:border-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-300 shadow-inner border-slate-300 dark:border-slate-700`}
             >
               <BaselineCloudUpload className="w-20 h-20 stroke-1 text-icons" />
 
-              <p className="text-textGray font-bold text-lg mb-2">
+              <p className="text-textGray dark:text-slate-400 font-bold text-lg mb-2">
                 Arrastra y suelta tu documento aquí
               </p>
-              <p className="text-xs text-textGray">
+              <p className="text-xs text-textGray dark:text-slate-500">
                 o haz clic para seleccionarlo
               </p>
               {error !== "" && (
@@ -87,24 +89,24 @@ export function UploadFileBox() {
           </div>
         </>
       ) : (
-        <div className="bg-white border border-slate-200 rounded-lg mt-5 mb-2 p-3 flex items-center justify-between shadow-sm">
+        <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg mt-5 mb-2 p-3 flex items-center justify-between shadow-sm">
           <div className="flex items-center space-x-3 min-w-0 flex-1">
-            <FileText className="w-5 h-5 text-red-700 flex-shrink-0" />
+            <FileText className="w-5 h-5 text-red-700 dark:text-red-500 flex-shrink-0" />
 
             <div className="flex flex-col min-w-0 flex-1">
               <span className="text-sm font-semibold truncate">
                 {file?.name}
               </span>
-              <span className="text-sm font-medium text-slate-800">
+              <span className="text-sm font-medium text-slate-800 dark:text-slate-200">
                 {formatFileSize(file)}
               </span>
             </div>
           </div>
           <button
             onClick={handleRemoveFile}
-            className="p-1.5 hover:bg-slate-100 rounded-full transition-colors"
+            className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full transition-colors"
           >
-            <X className="w-4 h-4 text-slate-500" />
+            <X className="w-4 h-4 text-slate-500 dark:text-slate-400" />
           </button>
         </div>
       )}

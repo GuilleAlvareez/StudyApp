@@ -119,9 +119,9 @@ export function Content() {
       </div>
 
       {/* CAMBIO: Eliminado 'min-h-0' para que la caja blanca crezca según el contenido */}
-      <div className="flex-1 bg-white px-6 py-7 shadow rounded-lg flex flex-col">
+      <div className="flex-1 bg-white dark:bg-slate-900 px-6 py-7 shadow rounded-lg flex flex-col">
         <div className="flex justify-between">
-          <p className="text-slate-800 font-semibold text-xl mb-4">
+          <p className="text-slate-800 dark:text-slate-200 font-semibold text-xl mb-4">
             Notas generadas
           </p>
           {notes.length > 0 && (
@@ -138,10 +138,10 @@ export function Content() {
           notes.length === 0 ? (
             <div className="flex flex-1 flex-col items-center justify-center min-h-[400px]">
               <FileUp className="w-20 h-20 stroke-1 text-icons" />
-              <p className="text-xl text-[#808290]">
+              <p className="text-xl text-[#808290] dark:text-slate-400">
                 Tus notas aparecerán aquí
               </p>
-              <p className="text-xl text-[#808290]">
+              <p className="text-xl text-[#808290] dark:text-slate-400">
                 Sube tu documento y pulsa en &quot;Generar notas&quot; para
                 empezar
               </p>
@@ -164,11 +164,11 @@ export function Content() {
               </div>
 
               {totalPages > 1 && (
-                <div className="flex items-center justify-center gap-4 mt-4 pt-4 border-t border-gray-200">
+                <div className="flex items-center justify-center gap-4 mt-4 pt-4 border-t border-gray-200 dark:border-slate-700">
                   <button
                     onClick={goToPrevious}
                     disabled={currentPage === 1}
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-300 dark:border-slate-700 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-slate-800"
                   >
                     <ChevronLeft className="w-4 h-4" />
                     Anterior
@@ -183,7 +183,7 @@ export function Content() {
                           className={`px-3 py-2 rounded-lg border ${
                             currentPage === page
                               ? "bg-indigo-500 text-white border-indigo-500"
-                              : "border-gray-300 hover:bg-gray-50"
+                              : "border-gray-300 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-800"
                           }`}
                         >
                           {page}
@@ -195,7 +195,7 @@ export function Content() {
                   <button
                     onClick={goToNext}
                     disabled={currentPage === totalPages}
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-300 dark:border-slate-700 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 dark:hover:bg-slate-800"
                   >
                     Siguiente
                     <ChevronRight className="w-4 h-4" />
@@ -206,7 +206,7 @@ export function Content() {
           )
         ) : (
           <div className="flex-1 flex items-center justify-center min-h-[400px]">
-             <Loader text="Generando notas" />
+            <Loader text="Generando notas" />
           </div>
         )}
       </div>
