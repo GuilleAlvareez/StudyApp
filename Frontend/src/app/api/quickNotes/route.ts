@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
 
     const data = await response.json();
     console.log("Notas recibidas:", data);
-    
+
     return NextResponse.json(data.choices?.[0]?.message?.content);
   } catch (error) {
     console.error("Error en el handler de la API:", error);

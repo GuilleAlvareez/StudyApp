@@ -191,3 +191,50 @@ export async function convertMarkdownToPdf(
     return null;
   }
 }
+
+export async function callOpenRouterWithFallback(
+  model: string,
+  systemPrompt: string,
+  userPrompt: string
+) {
+  const response = await fetch(
+    "https://openrouter.ai/api/v1/chat/completions",
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        "Content-Type": "application/json",
+        "HTTP-Referer": process.env.YOUR_SITE_URL || "",
+        "X-Title": process.env.YOUR_SITE_NAME || "StudyApp",
+      },
+      body: JSON.stringify({
+        model: model,
+        messages: [
+          {
+            role: "system",
+            content: systemPrompt,
+          },
+          {
+            role: "user",
+            content: userPrompt,
+          },
+        ],
+      }),
+    }
+  );
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error("Error desde OpenRouter:", errorText);
+    throw new Error(`OpenRouter API error: ${response.status} ${errorText}`);
+  }
+
+  const data = await response.json();
+  const content = data.choices?.[0]?.message?.content;
+
+  if (!content) {
+    throw new Error("OpenRouter returned valid JSON but no content found.");
+  }
+
+  return content;
+}

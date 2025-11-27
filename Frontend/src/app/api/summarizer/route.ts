@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { convertToMarkdown, convertMarkdownToPdf } from "./service/methods";
+import {
+  convertToMarkdown,
+  convertMarkdownToPdf,
+  callOpenRouterWithFallback,
+} from "./service/methods";
 
 export async function POST(req: NextRequest) {
   try {
@@ -8,53 +12,44 @@ export async function POST(req: NextRequest) {
     if (!markdownText) {
       return NextResponse.json(
         { error: "No se pudo extraer texto del PDF." },
-        { status: 400 }
+        { status: 500 }
       );
     }
 
-    const response = await fetch(
-      "https://openrouter.ai/api/v1/chat/completions",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-          "Content-Type": "application/json",
-          "HTTP-Referer": process.env.YOUR_SITE_URL || "",
-          "X-Title": process.env.YOUR_SITE_NAME || "StudyApp",
-        },
-        body: JSON.stringify({
-          model: process.env.LLM_MODEL,
-          messages: [
-            {
-              role: "system",
-              content: process.env.SYSTEM_PROMPT_SUMMARIZER,
-            },
-            {
-              role: "user",
-              content: `Resume el siguiente texto. No lo analices ni crees guías de estudio sobre él. Empieza directamente con el contenido resumido. Aquí está el texto:\n\n${markdownText}`,
-            },
-          ],
-        }),
+    let summary: string | undefined;
+
+    const systemPrompt =
+      process.env.SYSTEM_PROMPT_SUMMARIZER || "Eres un experto resumidor.";
+    const userPrompt = `Resume el siguiente texto. No lo analices ni crees guías de estudio sobre él. Empieza directamente con el contenido resumido. Aquí está el texto:\n\n${markdownText}`;
+
+    console.log("Primary Model:", process.env.LLM_MODEL);
+    console.log("Fallback Model:", process.env.FALLBACK_LLM_MODEL);
+
+    try {
+      summary = await callOpenRouterWithFallback(
+        process.env.LLM_MODEL || "",
+        systemPrompt,
+        userPrompt
+      );
+    } catch (error) {
+      console.error("Primary model failed. Error details:", error);
+      console.warn("Attempting fallback...");
+      try {
+        summary = await callOpenRouterWithFallback(
+          process.env.FALLBACK_LLM_MODEL || "",
+          systemPrompt,
+          userPrompt
+        );
+      } catch (fallbackError) {
+        console.error(
+          "Fallback model also failed. Error details:",
+          fallbackError
+        );
       }
-    );
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Error desde OpenRouter:", errorText);
-      return NextResponse.json(
-        { error: "El servicio de resumen falló." },
-        { status: response.status }
-      );
     }
 
-    const data = await response.json();
-
-    const summary = data.choices?.[0]?.message?.content;
     if (!summary) {
-      console.error(
-        "La respuesta de OpenRouter no contiene contenido válido:",
-        data
-      );
+      console.error("La respuesta de OpenRouter no contiene contenido válido.");
       return NextResponse.json(
         { error: "El LLM no devolvió un resumen válido." },
         { status: 500 }
