@@ -10,11 +10,59 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | StudyApp",
-    default: "StudyApp: Herramientas de Estudio con IA para Estudiantes",
+    template: "%s | StudyApp - IA para Estudiantes",
+    default:
+      "StudyApp: Resumidor de Textos y Notas con Inteligencia Artificial",
   },
   description:
-    "Potencia tu aprendizaje con StudyApp. Resume documentos, crea notas automáticas y estudia de forma más eficiente con nuestras herramientas de IA gratuitas.",
+    "Maximiza tu productividad académica con StudyApp. Nuestra IA resume documentos PDF, genera apuntes automáticos y crea tarjetas de estudio en segundos. ¡Prueba gratis!",
+  keywords: [
+    "IA para estudiantes",
+    "resumidor de textos",
+    "tomar apuntes con IA",
+    "resumen PDF",
+    "herramientas de estudio",
+    "inteligencia artificial educación",
+    "resumidor online",
+  ],
+  authors: [{ name: "StudyApp Team" }],
+  creator: "StudyApp",
+  publisher: "StudyApp",
+  openGraph: {
+    title: "StudyApp: Tu Asistente de Estudio con Inteligencia Artificial",
+    description:
+      "Deja de perder tiempo leyendo documentos interminables. StudyApp resume tus PDFs y crea notas de estudio al instante.",
+    url: "https://studyapp.com",
+    siteName: "StudyApp",
+    locale: "es_ES",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "StudyApp Interfaz de Usuario",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "StudyApp: Resúmenes y Notas con IA",
+    description:
+      "Potencia tu estudio con inteligencia artificial. Resúmenes precisos y notas rápidas en un clic.",
+    images: ["/twitter-image.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({

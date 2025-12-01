@@ -127,6 +127,27 @@ const HeroSection = () => {
 
   return (
     <section className="relative flex items-center justify-center min-h-screen px-4 py-20 text-center lg:text-left bg-gradient-to-br from-slate-50 via-white to-indigo-50 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950 overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "StudyApp",
+            applicationCategory: "EducationalApplication",
+            operatingSystem: "Web",
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD",
+            },
+            description:
+              "Herramienta de IA para estudiantes que resume documentos y genera notas de estudio automáticamente.",
+            featureList:
+              "Resumidor de PDF, Generador de Notas, Tarjetas de Estudio",
+          }),
+        }}
+      />
       <FloatingParticles />
 
       <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
@@ -142,7 +163,7 @@ const HeroSection = () => {
           >
             Estudia de forma más{" "}
             <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-              inteligente
+              inteligente con IA
             </span>
             , no más dura.
           </h1>
@@ -150,13 +171,14 @@ const HeroSection = () => {
           <p
             className={`${lato.className} text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-xl leading-relaxed`}
           >
-            Ahorra horas de lectura y acelera tu aprendizaje. Genera resúmenes y
-            notas de estudio con un solo clic.
+            Ahorra horas de lectura y acelera tu aprendizaje. Nuestra IA genera
+            resúmenes de textos y notas de estudio precisas con un solo clic.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <a
               href="/summarizer"
+              title="Ir al Resumidor de Textos con IA"
               className="group px-8 py-4 bg-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
             >
               Genera tu primer resumen
@@ -167,6 +189,7 @@ const HeroSection = () => {
             </a>
             <a
               href="#demoSection"
+              title="Ver Demo Interactiva de StudyApp"
               className="px-8 py-4 bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 font-semibold rounded-lg border-2 border-indigo-600 dark:border-indigo-400 hover:bg-indigo-50 dark:hover:bg-slate-700 transition-all duration-300"
             >
               Ver demo
@@ -397,7 +420,7 @@ const HowItWorksSection = () => {
           <h2
             className={`${poppins.className} text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-4`}
           >
-            Empieza en segundos
+            Empieza a estudiar mejor en segundos
           </h2>
           <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-16">
             Solo tres pasos te separan de tus materiales de estudio optimizados
@@ -412,7 +435,7 @@ const HowItWorksSection = () => {
                 <div className="hidden md:block absolute top-16 left-1/2 w-full h-0.5 bg-gradient-to-r from-slate-200 to-transparent dark:from-slate-700 z-0" />
               )}
 
-              <div
+              <article
                 className={`relative bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-2 border-slate-100 dark:border-slate-800 hover:border-indigo-200 dark:hover:border-indigo-800 group ${
                   isVisible
                     ? "opacity-100 translate-y-0"
@@ -439,7 +462,7 @@ const HowItWorksSection = () => {
                 >
                   {step.description}
                 </p>
-              </div>
+              </article>
             </div>
           ))}
         </div>
@@ -466,7 +489,7 @@ const FeaturesSection = () => {
           <h2
             className={`${poppins.className} text-3xl md:text-4xl lg:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-4`}
           >
-            Tus Superpoderes de Estudio
+            Herramientas de Estudio con IA
           </h2>
           <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
             Herramientas potentes diseñadas para maximizar tu eficiencia de
@@ -476,7 +499,7 @@ const FeaturesSection = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
           {/* Tarjeta Summarizer */}
-          <div
+          <article
             ref={ref1}
             className={`group bg-white dark:bg-slate-900 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 border-2 border-slate-100 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-700 ${
               isVisible1
@@ -491,7 +514,7 @@ const FeaturesSection = () => {
               <h3
                 className={`${poppins.className} text-2xl font-bold text-slate-800 dark:text-slate-100`}
               >
-                Summarizer
+                Resumidor
               </h3>
             </div>
 
@@ -533,10 +556,10 @@ const FeaturesSection = () => {
                 Resumen listo ✓
               </div>
             </div>
-          </div>
+          </article>
 
           {/* Tarjeta QuickNotes */}
-          <div
+          <article
             ref={ref2}
             className={`group bg-white dark:bg-slate-900 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 border-2 border-slate-100 dark:border-slate-800 hover:border-purple-300 dark:hover:border-purple-700 ${
               isVisible2
@@ -551,7 +574,7 @@ const FeaturesSection = () => {
               <h3
                 className={`${poppins.className} text-2xl font-bold text-slate-800 dark:text-slate-100`}
               >
-                QuickNotes
+                Notas Rapidas
               </h3>
             </div>
 
@@ -584,7 +607,7 @@ const FeaturesSection = () => {
                 ✨ Nota 3
               </div>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </section>
