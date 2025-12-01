@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: "StudyApp: Tu Asistente de Estudio con Inteligencia Artificial",
     description:
       "Deja de perder tiempo leyendo documentos interminables. StudyApp resume tus PDFs y crea notas de estudio al instante.",
-    url: "https://studyapp.com",
+    url: "https://study-app-kohl.vercel.app/",
     siteName: "StudyApp",
     locale: "es_ES",
     type: "website",
