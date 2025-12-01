@@ -22,9 +22,6 @@ export async function POST(req: NextRequest) {
       process.env.SYSTEM_PROMPT_SUMMARIZER || "Eres un experto resumidor.";
     const userPrompt = `Resume el siguiente texto. No lo analices ni crees guías de estudio sobre él. Empieza directamente con el contenido resumido. Aquí está el texto:\n\n${markdownText}`;
 
-    console.log("Primary Model:", process.env.LLM_MODEL);
-    console.log("Fallback Model:", process.env.FALLBACK_LLM_MODEL);
-
     try {
       summary = await callOpenRouterWithFallback(
         process.env.LLM_MODEL || "",
